@@ -38,7 +38,7 @@ RUN apt-get install -yqq libarchive-zip-perl libfile-which-perl libimage-size-pe
 
 RUN git clone https://github.com/brucemiller/LaTeXML.git && cd LaTeXML && perl Makefile.PL && make && make install && cd .. && rm -rf LaTeXML
 
-# Buile IPE
+# Buile IPE Extensible Drawing Editor
 
 RUN apt-get install -yqq checkinstall zlib1g-dev qtbase5-dev qtbase5-dev-tools libfreetype6-dev libcairo2-dev libjpeg8-dev libpng12-dev liblua5.3-dev
 
