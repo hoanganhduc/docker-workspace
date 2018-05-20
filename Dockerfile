@@ -1,4 +1,4 @@
-FROM debian:testing
+FROM ubuntu:16.04
 
 ARG USERNAME=latex
 ARG USERHOME=/home/latex
