@@ -65,7 +65,7 @@ RUN git clone https://github.com/latex2html/latex2html.git && cd latex2html && .
 
 # Build DocOnce
 
-RUN wget https://raw.githubusercontent.com/hplgit/doconce/master/doc/src/manual/install_doconce.sh && bash install_doconce.sh
+# RUN wget https://raw.githubusercontent.com/hplgit/doconce/master/doc/src/manual/install_doconce.sh && bash install_doconce.sh
 
 # Build git-latexdiff
 
