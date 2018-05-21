@@ -65,11 +65,43 @@ RUN git clone https://github.com/latex2html/latex2html.git && cd latex2html && .
 
 # Build DocOnce
 
-# RUN wget https://raw.githubusercontent.com/hplgit/doconce/master/doc/src/manual/install_doconce.sh && bash install_doconce.sh
+RUN apt-get install build-essential mercurial subversion python-pip idle python-dev python-setuptools python-pdftools
+
+RUN pip install setuptools ipython tornado pyzmq traitlets pickleshare jsonschema
+
+## Preprocessors
+
+RUN pip install future mako
+RUN pip install -e git+https://github.com/doconce/preprocess#egg=preprocess
+
+# Publish for handling bibliography
+RUN apt-get install -yqq libxml2-dev libxslt1-dev zlib1g-dev
+RUN pip install python-Levenshtein lxml
+RUN pip install -e hg+https://bitbucket.org/logg/publish#egg=publish
+
+# Sphinx (with additional third/party themes)
+RUN pip install sphinx alabaster sphinx_rtd_theme
+RUN pip install -e hg+https://bitbucket.org/ecollins/cloud_sptheme#egg=cloud_sptheme
+RUN pip install -e git+https://github.com/ryan-roemer/sphinx-bootstrap-theme#egg=sphinx-bootstrap-theme
+RUN pip install -e hg+https://bitbucket.org/miiton/sphinxjp.themes.solarized#egg=sphinxjp.themes.solarized
+RUN pip install -e git+https://github.com/shkumagai/sphinxjp.themes.impressjs#egg=sphinxjp.themes.impressjs
+RUN pip install -e git+https://github.com/kriskda/sphinx-sagecell#egg=sphinx-sagecell
+RUN pip install sphinxcontrib-paverutils paver cogapp
+RUN pip install -e git+https://bitbucket.org/hplbit/pygments-ipython-console#egg=pygments-ipython-console
+RUN pip install -e git+https://github.com/hplgit/pygments-doconce#egg=pygments-doconce
+
+# XHTML
+RUN pip install beautifulsoup4 html5lib
+
+# Image manipulation
+RUN apt-get install -yqq imagemagick inkscape netpbm mjpegtools pdftk giftrans gv
+
+# DocOnce
+RUN git clone https://github.com/hplgit/doconce.git && cd doconce && python setup.py install && cd .. && rm -rf doconce
 
 # Build git-latexdiff
 
-RUN git clone git@gitlab.com:git-latexdiff/git-latexdiff.git && cd git-latexdiff && make install && cd .. && rm -rf git-latexdiff
+RUN git clone https://gitlab.com:git-latexdiff/git-latexdiff.git && cd git-latexdiff && make install && cd .. && rm -rf git-latexdiff
 
 # Remove more unnecessary stuff
 RUN apt-get clean -y
