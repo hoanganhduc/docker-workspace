@@ -67,6 +67,8 @@ RUN git clone https://github.com/latex2html/latex2html.git && cd latex2html && .
 
 RUN apt-get install build-essential mercurial subversion python-pip idle python-dev python-setuptools python-pdftools
 
+RUN pip install --upgrade pip
+
 RUN pip install setuptools ipython tornado pyzmq traitlets pickleshare jsonschema
 
 ## Preprocessors
