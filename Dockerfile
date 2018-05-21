@@ -1,4 +1,4 @@
-FROM debian:testing
+FROM ubuntu:16.04
 
 ARG USERNAME=latex
 ARG USERHOME=/home/latex
@@ -62,6 +62,14 @@ RUN git clone --depth 1 https://github.com/coolwanglu/pdf2htmlEX.git && cd pdf2h
 # Build LaTeX2HTML
 
 RUN git clone https://github.com/latex2html/latex2html.git && cd latex2html && ./configure && make && make install
+
+# Build DocOnce
+
+RUN wget https://raw.githubusercontent.com/hplgit/doconce/master/doc/src/manual/install_doconce.sh && bash install_doconce.sh
+
+# Build git-latexdiff
+
+RUN git clone git@gitlab.com:git-latexdiff/git-latexdiff.git && cd git-latexdiff && make install && cd .. && rm -rf git-latexdiff
 
 # Remove more unnecessary stuff
 RUN apt-get clean -y
