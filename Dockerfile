@@ -103,7 +103,7 @@ RUN git clone https://github.com/hplgit/doconce.git && cd doconce && python setu
 
 # Build git-latexdiff
 
-RUN git clone https://gitlab.com/git-latexdiff/git-latexdiff.git && cd git-latexdiff && make install && cd .. && rm -rf git-latexdiff
+RUN apt-get install -yqq asciidoc-base && git clone https://gitlab.com/git-latexdiff/git-latexdiff.git && cd git-latexdiff && make install && cd .. && rm -rf git-latexdiff
 
 # Remove more unnecessary stuff
 RUN apt-get clean -y
