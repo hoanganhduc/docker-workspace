@@ -99,7 +99,7 @@ RUN pip install beautifulsoup4 html5lib
 RUN apt-get install -yqq imagemagick inkscape netpbm mjpegtools pdftk giftrans gv
 
 # DocOnce
-RUN git clone git@gitlab.com:hoanganhduc/doconce.git && cd doconce && python setup.py install && cd .. && rm -rf doconce
+RUN git clone https://gitlab.com/hoanganhduc/doconce.git && cd doconce && python setup.py install && cd .. && rm -rf doconce
 
 # Build git-latexdiff
 
