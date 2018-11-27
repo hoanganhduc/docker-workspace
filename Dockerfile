@@ -105,6 +105,15 @@ RUN git clone https://github.com/hoanganhduc/doconce.git && cd doconce && python
 
 RUN apt-get install -yqq asciidoc && git clone https://gitlab.com/git-latexdiff/git-latexdiff.git && cd git-latexdiff && make install && cd .. && rm -rf git-latexdiff
 
+# Jekyll
+
+RUN apt-get install ruby ruby-dev
+RUN gem install bundler
+RUN wget https://raw.githubusercontent.com/hoanganhduc/hoanganhduc.github.io/source/Gemfile
+RUN wget https://raw.githubusercontent.com/hoanganhduc/hoanganhduc.github.io/source/Gemfile.lock
+RUN bundle install
+RUN rm -rf Gemfile Gemfile.lock
+
 # Remove more unnecessary stuff
 RUN apt-get clean -y
 
