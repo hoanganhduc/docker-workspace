@@ -107,7 +107,7 @@ RUN apt-get install -yqq asciidoc && git clone https://gitlab.com/git-latexdiff/
 
 # Jekyll
 
-RUN apt-get install ruby ruby-dev
+RUN apt-get install -y ruby ruby-dev
 RUN gem install bundler
 RUN wget https://raw.githubusercontent.com/hoanganhduc/hoanganhduc.github.io/source/Gemfile
 RUN wget https://raw.githubusercontent.com/hoanganhduc/hoanganhduc.github.io/source/Gemfile.lock
