@@ -9,6 +9,6 @@ Dockerfile with
 * LaTeX2HTML: Latest version from GitHub repository https://github.com/latex2html/latex2html.git.
 * DocOnce: Latest version from https://github.com:hoanganhduc/doconce.
 * git-latexdiff: Latest version from GitHub repository https://gitlab.com/git-latexdiff/git-latexdiff.
-* Jekyll
+* Jekyll: HTML static site generator https://jekyllrb.com/.
 
 Automated build image: [hoanganhduc/latex](https://hub.docker.com/r/hoanganhduc/latex/).
