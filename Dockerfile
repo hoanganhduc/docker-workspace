@@ -1,9 +1,9 @@
 FROM ubuntu:16.04
 
-ARG USERNAME=latex
-ARG USERHOME=/home/latex
+ARG USERNAME=hoanganhduc
+ARG USERHOME=/home/hoanganhduc
 ARG USERID=1000
-ARG USERGECOS=LaTEX
+ARG USERGECOS='Duc A. Hoang'
 
 RUN adduser \
   --home "$USERHOME" \
@@ -12,25 +12,21 @@ RUN adduser \
   --disabled-password \
   "$USERNAME"
 
-ARG WGET=wget
-ARG GIT=git
-ARG MAKE=make
-ARG PANDOC=pandoc
-ARG PYGMENTS=python-pygments
+# Some necessary tools
 
-RUN apt-get update && apt-get install -y \
-  texlive-full \
-  # some auxiliary tools
-  "$WGET" \
-  "$GIT" \
-  "$MAKE" \
-  # markup format conversion tool
-  "$PANDOC" \
-  # Required for syntax highlighting using minted.
-  "$PYGMENTS" && \
-  # Removing documentation packages *after* installing them is kind of hacky,
-  # but it only adds some overhead while building the image.
-  apt-get --purge remove -y .\*-doc$
+RUN apt-get update && apt-get install -y software-properties-common wget git make pandoc python-pygments ssh subversion git git-core mercurial mercurial-common secure-delete wipe
+
+# Extract and Compression
+
+RUN apt-get install -y unace unrar unzip zip lrzip p7zip-full p7zip-rar sharutils rar uudeview mpack arj cabextract file-roller
+
+# TeXLive 
+
+RUN apt-get install -y texlive-full
+
+# Java
+
+RUN apt-get install -y default-jdk
 
 # Build LaTeXML
 
@@ -61,7 +57,9 @@ RUN git clone --depth 1 https://github.com/coolwanglu/pdf2htmlEX.git && cd pdf2h
 
 # Build LaTeX2HTML
 
-RUN git clone https://github.com/latex2html/latex2html.git && cd latex2html && ./configure && make && make install
+RUN apt-get install -y netpbm libnetpbm10 libnetpbm10-dev
+
+RUN git clone https://github.com/latex2html/latex2html.git && cd latex2html && ./configure && make && make install && cd .. && rm -rf latex2html
 
 # Build DocOnce
 
@@ -115,5 +113,6 @@ RUN bundle install
 RUN rm -rf Gemfile Gemfile.lock
 
 # Remove more unnecessary stuff
+RUN apt-get --purge remove -y .\*-doc$
 RUN apt-get clean -y
 

@@ -11,4 +11,4 @@ Dockerfile with
 * git-latexdiff: Latest version from GitHub repository https://gitlab.com/git-latexdiff/git-latexdiff.
 * Jekyll: HTML static site generator https://jekyllrb.com/.
 
-Automated build image: [hoanganhduc/latex](https://hub.docker.com/r/hoanganhduc/latex/).
+Automated build image: [hoanganhduc/workspace](https://hub.docker.com/r/hoanganhduc/workspace/).
