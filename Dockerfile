@@ -112,6 +112,10 @@ RUN wget https://raw.githubusercontent.com/hoanganhduc/hoanganhduc.github.io/sou
 RUN bundle install
 RUN rm -rf Gemfile Gemfile.lock
 
+# tzdata
+
+RUN wget http://archive.ubuntu.com/ubuntu/pool/main/t/tzdata/tzdata_2016d-0ubuntu0.16.04_all.deb && dpkg -i tzdata_2016d-0ubuntu0.16.04_all.deb && rm -rf tzdata_2016d-0ubuntu0.16.04_all.deb 
+
 # Remove more unnecessary stuff
 RUN apt-get --purge remove -y .\*-doc$
 RUN apt-get clean -y
