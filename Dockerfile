@@ -38,7 +38,7 @@ RUN git clone https://github.com/brucemiller/LaTeXML.git && cd LaTeXML && perl M
 
 RUN apt-get install -yqq checkinstall zlib1g-dev qtbase5-dev qtbase5-dev-tools libfreetype6-dev libcairo2-dev libjpeg8-dev libpng12-dev liblua5.3-dev
 
-RUN wget https://dl.bintray.com/otfried/generic/ipe/7.2/ipe-7.2.7-src.tar.gz && tar -xvf ipe-7.2.7-src.tar.gz && cd ipe-7.2.7/src && export QT_SELECT=5 && make IPEPREFIX=/usr/local && checkinstall --pkgname=ipe --pkgversion=7.2.7 --backup=no --fstrans=no --default make install IPEPREFIX=/usr/local && ldconfig && cd ../.. && rm -rf ipe-7.2.7*
+RUN wget https://dl.bintray.com/otfried/generic/ipe/7.2/ipe-7.2.12-src.tar.gz && tar -xvf ipe-7.2.12-src.tar.gz && cd ipe-7.2.12/src && export QT_SELECT=5 && make IPEPREFIX=/usr/local && checkinstall --pkgname=ipe --pkgversion=7.2.12 --backup=no --fstrans=no --default make install IPEPREFIX=/usr/local && ldconfig && cd ../.. && rm -rf ipe-7.2.12*
 
 # Build pdf2htmlEX
 
