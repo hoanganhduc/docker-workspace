@@ -14,7 +14,11 @@ RUN adduser \
 
 # Some necessary tools
 
-RUN apt-get update && apt-get install -y software-properties-common wget git make pandoc python-pygments ssh subversion git git-core mercurial mercurial-common secure-delete wipe tree bibtex2html
+RUN apt-get update && apt-get install -y software-properties-common wget git make pandoc python-pygments ssh subversion git git-core mercurial mercurial-common secure-delete wipe tree bibtex2html locales
+
+# Update locales
+
+RUN locale-gen en_US.UTF-8
 
 # Extract and Compression
 
