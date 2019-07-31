@@ -46,7 +46,7 @@ RUN git clone https://github.com/fontforge/libspiro.git && cd libspiro && autore
 
 RUN git clone https://github.com/fontforge/libuninameslist.git && cd libuninameslist && autoreconf -i && automake --foreign && ./configure && make && sudo make install && cd .. && rm -rf libuninameslist
 
-RUN git clone --depth 1 https://github.com/coolwanglu/fontforge.git && cd fontforge/ && ./bootstrap && ./configure && make && make install && ldconfig && cd .. && rm -rf fontforge
+RUN git clone --depth 1 https://github.com/fontforge/ && cd fontforge/ && ./bootstrap && ./configure && make && make install && ldconfig && cd .. && rm -rf fontforge
 
 # pdf2htmlEX
 RUN git clone --depth 1 https://github.com/coolwanglu/pdf2htmlEX.git && cd pdf2htmlEX/ && cmake . && make && make install && cd .. && rm -rf pdf2htmlEX
