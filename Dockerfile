@@ -40,6 +40,8 @@ RUN apt-get install -qq -y cmake gcc libgetopt++-dev pkg-config libopenjpeg-dev 
 RUN wget "https://poppler.freedesktop.org/poppler-0.43.0.tar.xz" --no-check-certificate && tar -xvf poppler-0.43.0.tar.xz && cd poppler-0.43.0/ && ./configure --enable-xpdf-headers && make && make install && cd .. && rm -rf poppler*
 
 # Fontforge
+RUN apt-get install -qq -y packaging-dev pkg-config python-dev libpango1.0-dev libglib2.0-dev libxml2-dev giflib-dbg libjpeg-dev libtiff-dev uthash-dev libspiro-dev
+
 RUN add-apt-repository ppa:fontforge/fontforge -y && apt-get update && apt-get install -y fontforge
 
 # pdf2htmlEX
