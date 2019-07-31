@@ -40,13 +40,7 @@ RUN apt-get install -qq -y cmake gcc libgetopt++-dev pkg-config libopenjpeg-dev 
 RUN wget "https://poppler.freedesktop.org/poppler-0.43.0.tar.xz" --no-check-certificate && tar -xvf poppler-0.43.0.tar.xz && cd poppler-0.43.0/ && ./configure --enable-xpdf-headers && make && make install && cd .. && rm -rf poppler*
 
 # Fontforge
-RUN apt-get install -qq -y packaging-dev pkg-config python-dev libpango1.0-dev libglib2.0-dev libxml2-dev giflib-dbg libjpeg-dev libtiff-dev libspiro-dev build-essential automake flex bison unifont
-
-RUN git clone https://github.com/fontforge/libspiro.git && cd libspiro && autoreconf -i && automake --foreign -Wall && ./configure && make && make install && cd .. && rm -rf libspiro
-
-RUN git clone https://github.com/fontforge/libuninameslist.git && cd libuninameslist && autoreconf -i && automake --foreign && ./configure && make && sudo make install && cd .. && rm -rf libuninameslist
-
-RUN git clone --depth 1 https://github.com/fontforge/ && cd fontforge/ && ./bootstrap && ./configure && make && make install && ldconfig && cd .. && rm -rf fontforge
+RUN add-apt-repository ppa:fontforge/fontforge -y && apt-get update && apt-get install fontforge
 
 # pdf2htmlEX
 RUN git clone --depth 1 https://github.com/coolwanglu/pdf2htmlEX.git && cd pdf2htmlEX/ && cmake . && make && make install && cd .. && rm -rf pdf2htmlEX
