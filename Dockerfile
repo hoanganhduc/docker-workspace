@@ -40,7 +40,7 @@ RUN apt-get install -qq -y cmake gcc libgetopt++-dev pkg-config libopenjpeg-dev 
 RUN wget "https://poppler.freedesktop.org/poppler-0.43.0.tar.xz" --no-check-certificate && tar -xvf poppler-0.43.0.tar.xz && cd poppler-0.43.0/ && ./configure --enable-xpdf-headers && make && make install && cd .. && rm -rf poppler*
 
 # Fontforge
-RUN add-apt-repository ppa:fontforge/fontforge -y && apt-get update && apt-get install fontforge
+RUN add-apt-repository ppa:fontforge/fontforge -y && apt-get update && apt-get install -y fontforge
 
 # pdf2htmlEX
 RUN git clone --depth 1 https://github.com/coolwanglu/pdf2htmlEX.git && cd pdf2htmlEX/ && cmake . && make && make install && cd .. && rm -rf pdf2htmlEX
