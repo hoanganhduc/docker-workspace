@@ -42,7 +42,9 @@ RUN wget "https://poppler.freedesktop.org/poppler-0.43.0.tar.xz" --no-check-cert
 # Fontforge
 RUN apt-get install -qq -y packaging-dev pkg-config python-dev libpango1.0-dev libglib2.0-dev libxml2-dev giflib-dbg libjpeg-dev libtiff-dev uthash-dev libspiro-dev
 
-RUN add-apt-repository ppa:fontforge/fontforge -y && apt-get update && apt-get install -y fontforge
+#RUN add-apt-repository ppa:fontforge/fontforge -y && apt-get update && apt-get install -y fontforge
+
+RUN wget https://github.com/fontforge/fontforge/archive/20141126.tar.gz && tar -xvf 20141126.tar.gz && cd fontforge-20141126/ && ./bootstrap && ./configure && make && make install && cd .. && rm -rf fontforge-20141126
 
 # pdf2htmlEX
 RUN git clone --depth 1 https://github.com/coolwanglu/pdf2htmlEX.git && cd pdf2htmlEX/ && cmake . && make && make install && cd .. && rm -rf pdf2htmlEX
