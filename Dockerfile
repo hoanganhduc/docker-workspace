@@ -14,7 +14,7 @@ RUN adduser \
 
 # Some necessary tools
 
-RUN apt-get update && apt-get install -y software-properties-common wget make git git-core locales
+RUN apt-get update && apt-get install -y software-properties-common wget make git git-core locales build-essential
 
 # Build pdf2htmlEX
 
@@ -82,7 +82,7 @@ RUN git clone https://github.com/latex2html/latex2html.git && cd latex2html && .
 
 # Build DocOnce
 
-RUN apt-get install -yqq build-essential mercurial subversion python-pip idle python-dev python-setuptools python-pdftools
+RUN apt-get install -yqq mercurial subversion python-pip idle python-dev python-setuptools python-pdftools
 
 RUN pip install --upgrade pip
 
