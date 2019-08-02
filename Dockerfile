@@ -28,7 +28,7 @@ RUN apt-get install -qq -y packaging-dev pkg-config python-dev libpango1.0-dev l
 
 #RUN add-apt-repository ppa:fontforge/fontforge -y && apt-get update && apt-get install -y fontforge
 
-RUN wget https://github.com/fontforge/fontforge/archive/20150228.tar.gz && tar -xvf 20150228.tar.gz && cd fontforge-20150228/ && ./bootstrap && ./configure && make && make install && cd .. && rm -rf fontforge*
+RUN git clone --depth 1 https://github.com/coolwanglu/fontforge.git && cd fontforge/ && ./bootstrap && ./configure && make && make install && cd .. && rm -rf fontforge*
 
 # pdf2htmlEX
 RUN git clone --depth 1 https://github.com/coolwanglu/pdf2htmlEX.git && cd pdf2htmlEX/ && cmake . && make && make install && cd .. && rm -rf pdf2htmlEX
