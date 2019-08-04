@@ -1,4 +1,4 @@
-FROM ubuntu:16.04
+FROM ubuntu:14.04
 
 ARG USERNAME=hoanganhduc
 ARG USERHOME=/home/hoanganhduc
@@ -112,6 +112,22 @@ RUN wget https://raw.githubusercontent.com/hoanganhduc/hoanganhduc.github.io/sou
 RUN wget https://raw.githubusercontent.com/hoanganhduc/hoanganhduc.github.io/source/Gemfile.lock
 RUN bundle install
 RUN rm -rf Gemfile Gemfile.lock
+
+# Build pdf2htmlEX
+
+#RUN apt-get install -qq -y cmake gcc libgetopt++-dev pkg-config libopenjpeg-dev libfontconfig1-dev libfontforge-dev poppler-data poppler-utils poppler-dbg
+
+# Poppler 0.43.0
+RUN wget "https://poppler.freedesktop.org/poppler-0.43.0.tar.xz" --no-check-certificate && tar -xvf poppler-0.43.0.tar.xz && cd poppler-0.43.0/ && ./configure --enable-xpdf-headers && make && make install && cd .. && rm -rf poppler*
+
+# Fontforge
+RUN apt-get install -qq -y packaging-dev pkg-config python-dev libpango1.0-dev libglib2.0-dev libxml2-dev giflib-dbg libjpeg-dev libtiff-dev uthash-dev libspiro-dev
+
+RUN git clone --depth 1 https://github.com/coolwanglu/fontforge.git && cd fontforge/ && ./bootstrap && ./configure && make && make install && cd .. && rm -rf fontforge
+
+# pdf2htmlEX
+RUN git clone --depth 1 https://github.com/coolwanglu/pdf2htmlEX.git && cd pdf2htmlEX/ && cmake . && make && make install && cd .. && rm -rf pdf2htmlEX
+
 
 # tzdata
 
