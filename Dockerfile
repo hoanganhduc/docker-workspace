@@ -14,7 +14,7 @@ RUN adduser \
 
 # Some necessary tools
 
-RUN apt-get update && apt-get install -y software-properties-common wget make git git-core locales build-essential
+RUN apt-get update && apt-get install -y software-properties-common wget make git git-core locales locale-gen build-essential
 
 # Update locales
 
