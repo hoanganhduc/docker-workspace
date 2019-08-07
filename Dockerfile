@@ -1,4 +1,4 @@
-FROM ubuntu:18.04
+FROM ubuntu:16.04
 
 ARG USERNAME=hoanganhduc
 ARG USERHOME=/home/hoanganhduc
@@ -18,7 +18,11 @@ RUN apt-get update && apt-get install -y software-properties-common wget make gi
 
 # Other tools
 
-RUN apt-get install -y pandoc python-pygments ssh subversion git git-core mercurial mercurial-common secure-delete wipe tree bibtex2html
+RUN apt-get install -y pandoc python-pygments ssh subversion git git-core mercurial mercurial-common secure-delete wipe tree bibtex2html pdf2htmlex
+
+# tzdata
+
+RUN wget http://archive.ubuntu.com/ubuntu/pool/main/t/tzdata/tzdata_2016d-0ubuntu0.16.04_all.deb && dpkg -i tzdata_2016d-0ubuntu0.16.04_all.deb && rm -rf tzdata_2016d-0ubuntu0.16.04_all.deb 
 
 # Extract and Compression
 
@@ -106,20 +110,15 @@ RUN rm -rf Gemfile Gemfile.lock
 #RUN apt-get install -qq -y cmake gcc libgetopt++-dev pkg-config libopenjpeg-dev libfontconfig1-dev libfontforge-dev poppler-data poppler-utils poppler-dbg
 
 # Poppler 0.43.0
-RUN wget "https://poppler.freedesktop.org/poppler-0.43.0.tar.xz" --no-check-certificate && tar -xvf poppler-0.43.0.tar.xz && cd poppler-0.43.0/ && ./configure --enable-xpdf-headers && make && make install && cd .. && rm -rf poppler*
+#RUN wget "https://poppler.freedesktop.org/poppler-0.43.0.tar.xz" --no-check-certificate && tar -xvf poppler-0.43.0.tar.xz && cd poppler-0.43.0/ && ./configure --enable-xpdf-headers && make && make install && cd .. && rm -rf poppler*
 
 # Fontforge
-RUN apt-get install -qq -y packaging-dev pkg-config python-dev libpango1.0-dev libglib2.0-dev libxml2-dev giflib-dbg libjpeg-dev libtiff-dev uthash-dev libspiro-dev
+R#UN apt-get install -qq -y packaging-dev pkg-config python-dev libpango1.0-dev libglib2.0-dev libxml2-dev giflib-dbg libjpeg-dev libtiff-dev uthash-dev libspiro-dev
 
-RUN git clone --depth 1 https://github.com/coolwanglu/fontforge.git && cd fontforge/ && ./bootstrap && ./configure && make && make install && cd .. && rm -rf fontforge
+#RUN git clone --depth 1 https://github.com/coolwanglu/fontforge.git && cd fontforge/ && ./bootstrap && ./configure && make && make install && cd .. && rm -rf fontforge
 
 # pdf2htmlEX
-RUN git clone --depth 1 https://github.com/coolwanglu/pdf2htmlEX.git && cd pdf2htmlEX/ && cmake . && make && make install && cd .. && rm -rf pdf2htmlEX
-
-
-# tzdata
-
-RUN wget http://archive.ubuntu.com/ubuntu/pool/main/t/tzdata/tzdata_2016d-0ubuntu0.16.04_all.deb && dpkg -i tzdata_2016d-0ubuntu0.16.04_all.deb && rm -rf tzdata_2016d-0ubuntu0.16.04_all.deb 
+#RUN git clone --depth 1 https://github.com/coolwanglu/pdf2htmlEX.git && cd pdf2htmlEX/ && cmake . && make && make install && cd .. && rm -rf pdf2htmlEX
 
 # Remove more unnecessary stuff
 RUN apt-get --purge remove -y .\*-doc$
