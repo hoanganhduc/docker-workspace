@@ -14,11 +14,23 @@ RUN adduser \
 
 # Some necessary tools
 
-RUN apt-get update && apt-get install -y software-properties-common wget make git git-core build-essential locales
+RUN apt-get update && apt-get install -y software-properties-common wget make git git-core build-essential locales sudo pandoc python-pygments ssh subversion git git-core mercurial mercurial-common secure-delete wipe tree bibtex2html fontconfig
 
-# Other tools
+# Build pdf2htmlEX
 
-RUN apt-get install -y pandoc python-pygments ssh subversion git git-core mercurial mercurial-common secure-delete wipe tree bibtex2html pdf2htmlex
+RUN apt-get install -qq -y cmake gcc libgetopt++-dev pkg-config libopenjpeg-dev libfontconfig1-dev libfontforge-dev poppler-data poppler-utils poppler-dbg
+
+# Poppler 0.43.0
+RUN wget "https://poppler.freedesktop.org/poppler-0.43.0.tar.xz" --no-check-certificate && tar -xvf poppler-0.43.0.tar.xz && cd poppler-0.43.0/ && ./configure --enable-xpdf-headers && make && make install && cd .. && rm -rf poppler*
+
+# Fontforge
+RUN apt-get install -qq -y packaging-dev pkg-config python-dev libpango1.0-dev libglib2.0-dev libxml2-dev giflib-dbg libjpeg-dev libtiff-dev uthash-dev libspiro-dev
+
+#RUN git clone --depth 1 https://github.com/coolwanglu/fontforge.git && cd fontforge/ && ./bootstrap && ./configure && make && make install && cd .. && rm -rf fontforge
+
+# pdf2htmlEX
+#RUN git clone --depth 1 https://github.com/coolwanglu/pdf2htmlEX.git && cd pdf2htmlEX/ && cmake . && make && make install && cd .. && rm -rf pdf2htmlEX
+RUN apt-get install -y pdf2htmlex
 
 # tzdata
 
@@ -28,9 +40,14 @@ RUN wget http://archive.ubuntu.com/ubuntu/pool/main/t/tzdata/tzdata_2016d-0ubunt
 
 RUN apt-get install -y unace unrar unzip zip lrzip p7zip-full p7zip-rar sharutils rar uudeview mpack arj cabextract file-roller
 
-# TeXLive 
+# TeXLive 2019
 
-RUN apt-get install -y texlive-full
+RUN wget http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz && tar -xvf install-tl-unx.tar.gz && cd install-tl-* && ./install-tl --profile=../texlive.profile && cd .. && rm -rf install-tl-* texlive.profile
+RUN echo "MANPATH=/usr/local/texlive/2019/texmf-dist/doc/man:$MANPATH; export MANPATH" >> /etc/bash.bashrc
+RUN echo "INFOPATH=/usr/local/texlive/2019/texmf-dist/doc/info:$INFOPATH; export INFOPATH" >> /etc/bash.bashrc
+RUN echo "PATH=/usr/local/texlive/2019/bin/x86_64-linux:$PATH; export PATH" >> /etc/bash.bashrc
+RUN echo "MANPATH_MAP /usr/local/texlive/2019/bin/x86_64-linux /usr/local/texlive/2019/texmf-dist/doc/man" >> /etc/manpath.config
+RUN wget http://tug.org/fonts/getnonfreefonts/install-getnonfreefonts && texlua install-getnonfreefonts && ln -s /usr/local/texlive/2019/bin/x86_64-linux/getnonfreefonts /usr/local/bin && getnonfreefonts --sys -a && fc-cache -fv && rm -rf install-getnonfreefonts
 
 # Java
 
@@ -104,21 +121,6 @@ RUN wget https://raw.githubusercontent.com/hoanganhduc/hoanganhduc.github.io/sou
 RUN wget https://raw.githubusercontent.com/hoanganhduc/hoanganhduc.github.io/source/Gemfile.lock
 RUN bundle install
 RUN rm -rf Gemfile Gemfile.lock
-
-# Build pdf2htmlEX
-
-#RUN apt-get install -qq -y cmake gcc libgetopt++-dev pkg-config libopenjpeg-dev libfontconfig1-dev libfontforge-dev poppler-data poppler-utils poppler-dbg
-
-# Poppler 0.43.0
-#RUN wget "https://poppler.freedesktop.org/poppler-0.43.0.tar.xz" --no-check-certificate && tar -xvf poppler-0.43.0.tar.xz && cd poppler-0.43.0/ && ./configure --enable-xpdf-headers && make && make install && cd .. && rm -rf poppler*
-
-# Fontforge
-#RUN apt-get install -qq -y packaging-dev pkg-config python-dev libpango1.0-dev libglib2.0-dev libxml2-dev giflib-dbg libjpeg-dev libtiff-dev uthash-dev libspiro-dev
-
-#RUN git clone --depth 1 https://github.com/coolwanglu/fontforge.git && cd fontforge/ && ./bootstrap && ./configure && make && make install && cd .. && rm -rf fontforge
-
-# pdf2htmlEX
-#RUN git clone --depth 1 https://github.com/coolwanglu/pdf2htmlEX.git && cd pdf2htmlEX/ && cmake . && make && make install && cd .. && rm -rf pdf2htmlEX
 
 # Remove more unnecessary stuff
 RUN apt-get --purge remove -y .\*-doc$
