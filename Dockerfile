@@ -47,7 +47,7 @@ RUN echo "MANPATH=/usr/local/texlive/2019/texmf-dist/doc/man:$MANPATH; export MA
 RUN echo "INFOPATH=/usr/local/texlive/2019/texmf-dist/doc/info:$INFOPATH; export INFOPATH" >> /etc/bash.bashrc
 RUN echo "PATH=/usr/local/texlive/2019/bin/x86_64-linux:$PATH; export PATH" >> /etc/bash.bashrc
 RUN echo "MANPATH_MAP /usr/local/texlive/2019/bin/x86_64-linux /usr/local/texlive/2019/texmf-dist/doc/man" >> /etc/manpath.config
-RUN wget http://tug.org/fonts/getnonfreefonts/install-getnonfreefonts && texlua install-getnonfreefonts && getnonfreefonts --sys -a && fc-cache -fv && rm -rf install-getnonfreefonts
+RUN wget http://tug.org/fonts/getnonfreefonts/install-getnonfreefonts && texlua install-getnonfreefonts && ln -sf /usr/local/texlive/2019/bin/x86_64-linux/getnonfreefonts /usr/local/bin && getnonfreefonts --sys -a && fc-cache -fv && rm -rf install-getnonfreefonts
 
 # Java
 
