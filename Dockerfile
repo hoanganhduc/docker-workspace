@@ -14,7 +14,7 @@ RUN adduser \
 
 # Some necessary tools
 
-RUN apt-get update && apt-get install -y software-properties-common wget make git git-core build-essential locales sudo pandoc python-pygments ssh subversion git git-core mercurial mercurial-common secure-delete wipe tree bibtex2html fontconfig
+RUN apt-get update && apt-get install -y software-properties-common wget make git git-core build-essential locales sudo python-pygments ssh subversion git git-core mercurial mercurial-common secure-delete wipe tree bibtex2html fontconfig
 
 # Build pdf2htmlEX
 
@@ -42,7 +42,7 @@ RUN apt-get install -y unace unrar unzip zip lrzip p7zip-full p7zip-rar sharutil
 
 # TeXLive 2019
 
-RUN wget http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz && tar -xvf install-tl-unx.tar.gz && cd install-tl-* && ./install-tl --profile=../texlive.profile && cd .. && rm -rf install-tl-* texlive.profile
+RUN wget http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz && tar -xvf install-tl-unx.tar.gz && cd install-tl-* && wget https://raw.githubusercontent.com/hoanganhduc/docker-workspace/master/texlive.profile && ./install-tl --profile=texlive.profile && cd .. && rm -rf install-tl-* 
 RUN echo "MANPATH=/usr/local/texlive/2019/texmf-dist/doc/man:$MANPATH; export MANPATH" >> /etc/bash.bashrc
 RUN echo "INFOPATH=/usr/local/texlive/2019/texmf-dist/doc/info:$INFOPATH; export INFOPATH" >> /etc/bash.bashrc
 RUN echo "PATH=/usr/local/texlive/2019/bin/x86_64-linux:$PATH; export PATH" >> /etc/bash.bashrc
