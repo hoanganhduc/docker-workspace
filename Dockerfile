@@ -15,7 +15,7 @@ RUN passwd -d "$USERNAME"
 
 # Some necessary tools
 
-RUN apt-get update && apt-get install -y software-properties-common wget curl make git git-core build-essential locales sudo python-pygments ssh subversion git git-core mercurial mercurial-common secure-delete wipe tree bibtex2html fontconfig
+RUN apt-get update && apt-get install -y software-properties-common wget make git git-core build-essential locales sudo python-pygments ssh subversion git git-core mercurial mercurial-common secure-delete wipe tree bibtex2html fontconfig
 
 # Build pdf2htmlEX
 
@@ -64,7 +64,7 @@ RUN git clone https://github.com/brucemiller/LaTeXML.git && cd LaTeXML && perl M
 
 RUN apt-get install -yqq checkinstall zlib1g-dev qtbase5-dev qtbase5-dev-tools libfreetype6-dev libcairo2-dev libjpeg8-dev libpng12-dev liblua5.3-dev
 
-RUN curl -O https://dl.bintray.com/otfried/generic/ipe/7.2/ipe-7.2.21-src.tar.gz && tar -xvf ipe-7.2.21-src.tar.gz && cd ipe-7.2.21/src && export QT_SELECT=5 && make IPEPREFIX=/usr/local && checkinstall --pkgname=ipe --pkgversion=7.2.21 --backup=no --fstrans=no --default make install IPEPREFIX=/usr/local && ldconfig && cd ../.. && rm -rf ipe-7.2.21*
+RUN wget https://dl.bintray.com/otfried/generic/ipe/7.2/ipe-7.2.21-src.tar.gz && tar -xvf ipe-7.2.21-src.tar.gz && cd ipe-7.2.21/src && export QT_SELECT=5 && make IPEPREFIX=/usr/local && checkinstall --pkgname=ipe --pkgversion=7.2.21 --backup=no --fstrans=no --default make install IPEPREFIX=/usr/local && ldconfig && cd ../.. && rm -rf ipe-7.2.21*
 
 # Build LaTeX2HTML
 
