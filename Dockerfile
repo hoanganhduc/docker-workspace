@@ -62,7 +62,7 @@ RUN git clone https://github.com/brucemiller/LaTeXML.git && cd LaTeXML && perl M
 
 # Buile IPE
 
-RUN apt-get install -yqq checkinstall zlib1g-dev qtbase5-dev qtbase5-dev-tools libfreetype6-dev libcairo2-dev libjpeg8-dev libpng12-dev liblua5.3-dev
+RUN apt-get install -yqq checkinstall qtbase5-dev qtbase5-dev-tools libfreetype6-dev libcairo2-dev libjpeg8-dev libpng-dev liblua5.3-dev zlib1g-dev libgsl-dev curl 
 
 RUN wget https://dl.bintray.com/otfried/generic/ipe/7.2/ipe-7.2.21-src.tar.gz && tar -xvf ipe-7.2.21-src.tar.gz && cd ipe-7.2.21/src && export QT_SELECT=5 && make IPEPREFIX=/usr/local && checkinstall --pkgname=ipe --pkgversion=7.2.21 --backup=no --fstrans=no --default make install IPEPREFIX=/usr/local && ldconfig && cd ../.. && rm -rf ipe-7.2.21*
 
