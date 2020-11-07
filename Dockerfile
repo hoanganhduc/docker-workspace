@@ -15,7 +15,7 @@ RUN passwd -d "$USERNAME"
 
 # Some necessary tools
 
-RUN apt-get update && apt-get install -y software-properties-common wget make git git-core build-essential locales sudo python-pygments ssh subversion git git-core mercurial mercurial-common secure-delete wipe tree bibtex2html fontconfig
+RUN apt-get update && apt-get install -y software-properties-common wget curl make git git-core build-essential locales sudo python-pygments ssh subversion git git-core mercurial mercurial-common secure-delete wipe tree bibtex2html fontconfig
 
 # Build pdf2htmlEX
 
@@ -35,7 +35,7 @@ RUN apt-get install -y pdf2htmlex
 
 # tzdata
 
-RUN wget http://archive.ubuntu.com/ubuntu/pool/main/t/tzdata/tzdata_2016d-0ubuntu0.16.04_all.deb && dpkg -i tzdata_2016d-0ubuntu0.16.04_all.deb && rm -rf tzdata_2016d-0ubuntu0.16.04_all.deb 
+#RUN wget http://archive.ubuntu.com/ubuntu/pool/main/t/tzdata/tzdata_2016d-0ubuntu0.16.04_all.deb && dpkg -i tzdata_2016d-0ubuntu0.16.04_all.deb && rm -rf tzdata_2016d-0ubuntu0.16.04_all.deb 
 
 # Extract and Compression
 
@@ -44,11 +44,11 @@ RUN apt-get install -y unace unrar unzip zip lrzip p7zip-full p7zip-rar sharutil
 # TeXLive 2019
 
 RUN wget http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz && tar -xvf install-tl-unx.tar.gz && cd install-tl-* && wget https://raw.githubusercontent.com/hoanganhduc/docker-workspace/master/texlive.profile && ./install-tl --profile=texlive.profile && cd .. && rm -rf install-tl-* 
-RUN echo "MANPATH=/usr/local/texlive/2019/texmf-dist/doc/man:$MANPATH; export MANPATH" >> /etc/bash.bashrc
-RUN echo "INFOPATH=/usr/local/texlive/2019/texmf-dist/doc/info:$INFOPATH; export INFOPATH" >> /etc/bash.bashrc
-RUN echo "PATH=/usr/local/texlive/2019/bin/x86_64-linux:$PATH; export PATH" >> /etc/bash.bashrc
-RUN echo "MANPATH_MAP /usr/local/texlive/2019/bin/x86_64-linux /usr/local/texlive/2019/texmf-dist/doc/man" >> /etc/manpath.config
-RUN wget http://tug.org/fonts/getnonfreefonts/install-getnonfreefonts && texlua install-getnonfreefonts && ln -sf /usr/local/texlive/2019/bin/x86_64-linux/getnonfreefonts /usr/local/bin && getnonfreefonts --sys -a && fc-cache -fv && rm -rf install-getnonfreefonts
+RUN echo "MANPATH=/usr/local/texlive/2020/texmf-dist/doc/man:$MANPATH; export MANPATH" >> /etc/bash.bashrc
+RUN echo "INFOPATH=/usr/local/texlive/2020/texmf-dist/doc/info:$INFOPATH; export INFOPATH" >> /etc/bash.bashrc
+RUN echo "PATH=/usr/local/texlive/2020/bin/x86_64-linux:$PATH; export PATH" >> /etc/bash.bashrc
+RUN echo "MANPATH_MAP /usr/local/texlive/2020/bin/x86_64-linux /usr/local/texlive/2020/texmf-dist/doc/man" >> /etc/manpath.config
+RUN wget http://tug.org/fonts/getnonfreefonts/install-getnonfreefonts && texlua install-getnonfreefonts && ln -sf /usr/local/texlive/2020/bin/x86_64-linux/getnonfreefonts /usr/local/bin && getnonfreefonts --sys -a && fc-cache -fv && rm -rf install-getnonfreefonts
 
 # Java
 
@@ -64,7 +64,7 @@ RUN git clone https://github.com/brucemiller/LaTeXML.git && cd LaTeXML && perl M
 
 RUN apt-get install -yqq checkinstall zlib1g-dev qtbase5-dev qtbase5-dev-tools libfreetype6-dev libcairo2-dev libjpeg8-dev libpng12-dev liblua5.3-dev
 
-RUN wget https://dl.bintray.com/otfried/generic/ipe/7.2/ipe-7.2.12-src.tar.gz && tar -xvf ipe-7.2.12-src.tar.gz && cd ipe-7.2.12/src && export QT_SELECT=5 && make IPEPREFIX=/usr/local && checkinstall --pkgname=ipe --pkgversion=7.2.12 --backup=no --fstrans=no --default make install IPEPREFIX=/usr/local && ldconfig && cd ../.. && rm -rf ipe-7.2.12*
+RUN curl -O https://dl.bintray.com/otfried/generic/ipe/7.2/ipe-7.2.21-src.tar.gz && tar -xvf ipe-7.2.21-src.tar.gz && cd ipe-7.2.21/src && export QT_SELECT=5 && make IPEPREFIX=/usr/local && checkinstall --pkgname=ipe --pkgversion=7.2.21 --backup=no --fstrans=no --default make install IPEPREFIX=/usr/local && ldconfig && cd ../.. && rm -rf ipe-7.2.21*
 
 # Build LaTeX2HTML
 
@@ -83,23 +83,17 @@ RUN pip install setuptools ipython tornado pyzmq traitlets pickleshare jsonschem
 ## Preprocessors
 
 RUN pip install future mako
-RUN pip install -e git+https://github.com/doconce/preprocess#egg=preprocess
+#RUN pip install -e git+https://github.com/doconce/preprocess#egg=preprocess
+RUN git clone https://github.com/doconce/preprocess && cd preprocess && python setup.py install && cd .. && rm -rf preprocess
 
 # Publish for handling bibliography
 RUN apt-get install -yqq libxml2-dev libxslt1-dev zlib1g-dev
 RUN pip install python-Levenshtein lxml
-RUN pip install -e hg+https://bitbucket.org/logg/publish#egg=publish
+#RUN pip install -e git+https://github.com/hoanganhduc/logg-publish#egg=publish
+RUN git clone https://github.com/hoanganhduc/logg-publish && cd logg-publish && python setup.py install && cd .. && rm -rf logg-publish
 
-# Sphinx (with additional third/party themes)
+# Sphinx
 RUN pip install sphinx alabaster sphinx_rtd_theme
-RUN pip install -e hg+https://bitbucket.org/ecollins/cloud_sptheme#egg=cloud_sptheme
-RUN pip install -e git+https://github.com/ryan-roemer/sphinx-bootstrap-theme#egg=sphinx-bootstrap-theme
-RUN pip install -e hg+https://bitbucket.org/miiton/sphinxjp.themes.solarized#egg=sphinxjp.themes.solarized
-RUN pip install -e git+https://github.com/shkumagai/sphinxjp.themes.impressjs#egg=sphinxjp.themes.impressjs
-RUN pip install -e git+https://github.com/kriskda/sphinx-sagecell#egg=sphinx-sagecell
-RUN pip install sphinxcontrib-paverutils paver cogapp
-RUN pip install -e git+https://bitbucket.org/hplbit/pygments-ipython-console#egg=pygments-ipython-console
-RUN pip install -e git+https://github.com/hplgit/pygments-doconce#egg=pygments-doconce
 
 # XHTML
 RUN pip install beautifulsoup4 html5lib
@@ -118,8 +112,8 @@ RUN apt-get install -yqq asciidoc && git clone https://gitlab.com/git-latexdiff/
 
 RUN apt-get install -y ruby ruby-dev
 RUN gem install bundler
-RUN wget https://raw.githubusercontent.com/hoanganhduc/hoanganhduc.github.io/source/Gemfile
-RUN wget https://raw.githubusercontent.com/hoanganhduc/hoanganhduc.github.io/source/Gemfile.lock
+RUN wget https://raw.githubusercontent.com/hoanganhduc/hoanganhduc.github.io/master/Gemfile 
+RUN wget https://raw.githubusercontent.com/hoanganhduc/hoanganhduc.github.io/master/Gemfile.lock
 RUN bundle install
 RUN rm -rf Gemfile Gemfile.lock
 
