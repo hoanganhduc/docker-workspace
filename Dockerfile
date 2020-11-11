@@ -28,7 +28,7 @@ RUN pacman -S --needed --noconfirm poppler popper-glib poppler-data poppler-qt5 
 	pacman -U automake-1.15-1-any.pkg.tar.xz && \
 	rm -rf automake-1.15-1-any.pkg.tar.xz && \
 	wget https://hoanganhduc.github.io/archlinux/x86_64/libunicodenames-1.2.2-1-x86_64.pkg.tar.zst && \
-	pacamn -U libunicodenames-1.2.2-1-x86_64.pkg.tar.zst && \
+	pacman -U libunicodenames-1.2.2-1-x86_64.pkg.tar.zst && \
 	rm -rf libunicodenames-1.2.2-1-x86_64.pkg.tar.zst
 
 # Poppler 0.59.0
