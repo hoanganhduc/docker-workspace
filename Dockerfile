@@ -32,7 +32,7 @@ RUN pacman -S --needed --noconfirm poppler popper-glib poppler-data poppler-qt5 
 RUN wget https://poppler.freedesktop.org/poppler-0.59.0.tar.xz && \
 	tar -xvf poppler-0.59.0.tar.xz && \
 	cd poppler-0.59.0/ &&\
-	./configure --prefix=/usr/local --enable-xpdf-headers && 
+	./configure --prefix=/usr/local --enable-xpdf-headers && \
 	make && \
 	make install && \
 	ln -sf /usr/local/lib/libpoppler.so.70 /usr/lib/libpoppler.so.70 && \
