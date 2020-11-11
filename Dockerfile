@@ -23,10 +23,13 @@ RUN pacman -Syy && \
 
 # Build pdf2htmlEX
 
-RUN pacman -S --needed --noconfirm poppler popper-glib poppler-data poppler-qt5 libxi pango giflib libtool desktop-file-utils gtk-update-icon-cache libunicodenames gc python shared-mime-info openjpeg2 qt5-base && \
+RUN pacman -S --needed --noconfirm poppler popper-glib poppler-data poppler-qt5 libxi pango giflib libtool desktop-file-utils gtk-update-icon-cache gc python shared-mime-info openjpeg2 qt5-base && \
 	wget https://archive.org/download/archlinux_pkg_automake/automake-1.15-1-any.pkg.tar.xz && \
 	pacman -U automake-1.15-1-any.pkg.tar.xz && \
-	rm -rf automake-1.15-1-any.pkg.tar.xz
+	rm -rf automake-1.15-1-any.pkg.tar.xz && \
+	wget https://hoanganhduc.github.io/archlinux/x86_64/libunicodenames-1.2.2-1-x86_64.pkg.tar.zst && \
+	pacamn -U libunicodenames-1.2.2-1-x86_64.pkg.tar.zst && \
+	rm -rf libunicodenames-1.2.2-1-x86_64.pkg.tar.zst
 
 # Poppler 0.59.0
 RUN wget https://poppler.freedesktop.org/poppler-0.59.0.tar.xz && \
