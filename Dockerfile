@@ -25,10 +25,10 @@ RUN pacman -Syy && \
 
 RUN pacman -S --needed --noconfirm poppler poppler-glib poppler-data poppler-qt5 libxi pango giflib libtool desktop-file-utils gtk-update-icon-cache gc python shared-mime-info openjpeg2 qt5-base && \
 	wget https://archive.org/download/archlinux_pkg_automake/automake-1.15-1-any.pkg.tar.xz && \
-	pacman -U automake-1.15-1-any.pkg.tar.xz && \
+	pacman -U --noconfirm automake-1.15-1-any.pkg.tar.xz && \
 	rm -rf automake-1.15-1-any.pkg.tar.xz && \
 	wget https://hoanganhduc.github.io/archlinux/x86_64/libunicodenames-1.2.2-1-x86_64.pkg.tar.zst && \
-	pacman -U libunicodenames-1.2.2-1-x86_64.pkg.tar.zst && \
+	pacman -U --noconfirm libunicodenames-1.2.2-1-x86_64.pkg.tar.zst && \
 	rm -rf libunicodenames-1.2.2-1-x86_64.pkg.tar.zst
 
 # Poppler 0.59.0
@@ -50,16 +50,16 @@ RUN curl -O https://download.libsodium.org/libsodium/releases/old/unsupported/li
 	make install && \
 	ln -sf /usr/local/lib/libsodium.so.13 /usr/lib/libsodium.so.13 && \
 	cd .. && rm -rf libsodium-0.7.1* && \
-	wget https://hoanganhduc.github.io/archlinux/x86_64/readline6-6.3.008-4-x86_64.pkg.tar.zst && pacman -U readline6-6.3.008-4-x86_64.pkg.tar.zst && \
-	wget https://hoanganhduc.github.io/archlinux/x86_64/zeromq-4.0.6-1-x86_64.pkg.tar.xz && pacman -U zeromq-4.0.6-1-x86_64.pkg.tar.xz && \
-	wget https://hoanganhduc.github.io/archlinux/x86_64/libxkbui-1.0.2-6-x86_64.pkg.tar.xz && pacman -U libxkbui-1.0.2-6-x86_64.pkg.tar.xz && \
-	wget https://hoanganhduc.github.io/archlinux/x86_64/libspiro-1%3A0.5.20150702-2-x86_64.pkg.tar.xz && pacman -U libspiro-1:0.5.20150702-2-x86_64.pkg.tar.xz && \
-	wget https://hoanganhduc.github.io/archlinux/x86_64/fontforge-20141126-3-x86_64.pkg.tar.xz && pacman -U fontforge-20141126-3-x86_64.pkg.tar.xz && \
+	wget https://hoanganhduc.github.io/archlinux/x86_64/readline6-6.3.008-4-x86_64.pkg.tar.zst && pacman -U --noconfirm readline6-6.3.008-4-x86_64.pkg.tar.zst && \
+	wget https://hoanganhduc.github.io/archlinux/x86_64/zeromq-4.0.6-1-x86_64.pkg.tar.xz && pacman -U --noconfirm zeromq-4.0.6-1-x86_64.pkg.tar.xz && \
+	wget https://hoanganhduc.github.io/archlinux/x86_64/libxkbui-1.0.2-6-x86_64.pkg.tar.xz && pacman -U --noconfirm libxkbui-1.0.2-6-x86_64.pkg.tar.xz && \
+	wget https://hoanganhduc.github.io/archlinux/x86_64/libspiro-1%3A0.5.20150702-2-x86_64.pkg.tar.xz && pacman -U --noconfirm libspiro-1:0.5.20150702-2-x86_64.pkg.tar.xz && \
+	wget https://hoanganhduc.github.io/archlinux/x86_64/fontforge-20141126-3-x86_64.pkg.tar.xz && pacman -U --noconfirm fontforge-20141126-3-x86_64.pkg.tar.xz && \
 	rm -rf *.pkg.tar.*
 
 # pdf2htmlEX
 #RUN git clone --depth 1 https://github.com/coolwanglu/pdf2htmlEX.git && cd pdf2htmlEX/ && cmake . && make && make install && cd .. && rm -rf pdf2htmlEX
-RUN wget https://hoanganhduc.github.io/archlinux/x86_64/pdf2htmlex-git-1_1742.f12fc15-3-x86_64.pkg.tar.xz && pacman -U pdf2htmlex-git-1_1742.f12fc15-3-x86_64.pkg.tar.xz && \
+RUN wget https://hoanganhduc.github.io/archlinux/x86_64/pdf2htmlex-git-1_1742.f12fc15-3-x86_64.pkg.tar.xz && pacman -U --noconfirm pdf2htmlex-git-1_1742.f12fc15-3-x86_64.pkg.tar.xz && \
 	rm -rf *.pkg.tar.*
 
 # TeXLive 2019
@@ -78,7 +78,7 @@ RUN pacman -S --needed --noconfirm perl-latexml
 # IPE
 
 RUN pacman -S --noconfirm --needed lua53 qt5-base qt5-svg freetype2 zlib poppler hicolor-icon-theme gsl && \
-	wget https://hoanganhduc.github.io/archlinux/x86_64/ipe-7.2.21-1-x86_64.pkg.tar.zst && pacman -U ipe-7.2.21-1-x86_64.pkg.tar.zst && \
+	wget https://hoanganhduc.github.io/archlinux/x86_64/ipe-7.2.21-1-x86_64.pkg.tar.zst && pacman -U --noconfirm ipe-7.2.21-1-x86_64.pkg.tar.zst && \
 	rm -rf *.pkg.tar.*
 
 # LaTeX2HTML
