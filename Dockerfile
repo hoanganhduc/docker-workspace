@@ -23,7 +23,7 @@ RUN pacman -Syy && \
 
 # Build pdf2htmlEX
 
-RUN pacman -S --needed --noconfirm poppler popper-glib poppler-data poppler-qt5 libxi pango giflib libtool desktop-file-utils gtk-update-icon-cache gc python shared-mime-info openjpeg2 qt5-base && \
+RUN pacman -S --needed --noconfirm poppler poppler-glib poppler-data poppler-qt5 libxi pango giflib libtool desktop-file-utils gtk-update-icon-cache gc python shared-mime-info openjpeg2 qt5-base && \
 	wget https://archive.org/download/archlinux_pkg_automake/automake-1.15-1-any.pkg.tar.xz && \
 	pacman -U automake-1.15-1-any.pkg.tar.xz && \
 	rm -rf automake-1.15-1-any.pkg.tar.xz && \
