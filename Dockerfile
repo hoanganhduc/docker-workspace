@@ -73,7 +73,7 @@ RUN pacman -S --needed --noconfirm jdk-openjdk jre-openjdk # latest java
 
 # LaTeXML
 
-RUN pacman -S --needed --noconfirm perl-latexml
+RUN wget https://hoanganhduc.github.io/archlinux/x86_64/perl-latexml-0.8.4-2-any.pkg.tar.zst && pacman -U --needed --noconfirm perl-latexml && rm -rf perl-latexml-0.8.4-2-any.pkg.tar.zst
 
 # IPE
 
