@@ -29,8 +29,7 @@ RUN pacman -Syy && \
 	pacman -S --needed --noconfirm base base-devel cmake wget curl git sudo openssh tree rsync
 	
 USER $USERNAME
-
-RUN cd $HOME
+WORKDIR $USERHOME
 
 # yay
 
