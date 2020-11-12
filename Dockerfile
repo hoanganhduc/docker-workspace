@@ -16,6 +16,13 @@ RUN useradd \
 	"$USERNAME" && \
 	echo "$USERNAME ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
+# Set locale
+RUN sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen && \
+    locale-gen
+ENV LANG en_US.UTF-8  
+ENV LANGUAGE en_US:en  
+ENV LC_ALL en_US.UTF-8 
+
 # Some necessary tools
 
 RUN pacman -Syy && \
@@ -40,7 +47,7 @@ RUN yay -S --needed --noconfirm poppler poppler-glib poppler-data poppler-qt5 li
 	sudo pacman -U --noconfirm libunicodenames-1.2.2-1-x86_64.pkg.tar.zst && \
 	rm -rf libunicodenames-1.2.2-1-x86_64.pkg.tar.zst
 
-# Poppler 0.59.0
+## Poppler 0.59.0
 RUN wget https://poppler.freedesktop.org/poppler-0.59.0.tar.xz && \
 	tar -xvf poppler-0.59.0.tar.xz && \
 	cd poppler-0.59.0/ &&\
@@ -50,7 +57,7 @@ RUN wget https://poppler.freedesktop.org/poppler-0.59.0.tar.xz && \
 	ln -sf /usr/local/lib/libpoppler.so.70 /usr/lib/libpoppler.so.70 && \
 	cd .. && rm -rf poppler-0.59.0*
 
-# Fontforge
+## Fontforge
 RUN curl -O https://download.libsodium.org/libsodium/releases/old/unsupported/libsodium-0.7.1.tar.gz && \
 	tar xvf libsodium-0.7.1.tar.gz && \
 	cd libsodium-0.7.1/ && \
@@ -66,7 +73,7 @@ RUN curl -O https://download.libsodium.org/libsodium/releases/old/unsupported/li
 	wget https://hoanganhduc.github.io/archlinux/x86_64/fontforge-20141126-3-x86_64.pkg.tar.xz && sudo pacman -U --noconfirm fontforge-20141126-3-x86_64.pkg.tar.xz && \
 	rm -rf *.pkg.tar.*
 
-# pdf2htmlEX
+## pdf2htmlEX
 #RUN git clone --depth 1 https://github.com/coolwanglu/pdf2htmlEX.git && cd pdf2htmlEX/ && cmake . && make && make install && cd .. && rm -rf pdf2htmlEX
 RUN yay -S --needed --noconfirm pdf2htmlex-git
 
@@ -99,16 +106,6 @@ RUN yay -S --needed --noconfirm python2-virtualenv python2-pip && \
 	git clone https://github.com/hoanganhduc/logg-publish && cd logg-publish && sudo python2 setup.py install && cd .. && rm -rf logg-publish && \
 	git clone https://github.com/hoanganhduc/doconce.git && cd doconce && sudo python2 setup.py install
 
-# Remove more unnecessary stuff
-RUN yes | yay -Scc
-
-# Set locale
-RUN sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen && \
-    locale-gen
-ENV LANG en_US.UTF-8  
-ENV LANGUAGE en_US:en  
-ENV LC_ALL en_US.UTF-8 
-
 # Jekyll
 
 RUN yay -S --needed --noconfirm ruby ruby-dev
@@ -118,4 +115,7 @@ RUN cd $HOME && \
 	wget https://raw.githubusercontent.com/hoanganhduc/hoanganhduc.github.io/master/Gemfile.lock &&  \
 	bundle install && \
 	rm -rf Gemfile Gemfile.lock
+	
+# Remove more unnecessary stuff
+RUN yes | yay -Scc
 
