@@ -30,6 +30,8 @@ RUN pacman -Syy && \
 	
 USER $USERNAME
 
+RUN cd $HOME
+
 # yay
 
 RUN git clone https://aur.archlinux.org/yay && \
