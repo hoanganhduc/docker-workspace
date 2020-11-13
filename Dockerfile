@@ -42,34 +42,25 @@ RUN git clone https://aur.archlinux.org/yay && \
 
 # Build pdf2htmlEX
 
-RUN yay -S --needed --noconfirm poppler poppler-glib poppler-data poppler-qt5 libxi pango giflib libtool desktop-file-utils gtk-update-icon-cache gc python shared-mime-info openjpeg2 qt5-base && \
+RUN yay -S --needed --noconfirm poppler-data && \
+	wget https://archive.org/download/archlinux_pkg_poppler/poppler-0.59.0-1-x86_64.pkg.tar.xz && \
+	sudo pacman -U --noconfirm poppler-0.59.0-1-x86_64.pkg.tar.xz && \
+	rm -rf poppler-0.59.0-1-x86_64.pkg.tar.xz && \
+	wget https://archive.org/download/archlinux_pkg_poppler-glib/poppler-glib-0.59.0-1-x86_64.pkg.tar.xz && \
+	sudo pacman -U --noconfirm poppler-glib-0.59.0-1-x86_64.pkg.tar.xz && \
+	rm -rf poppler-glib-0.59.0-1-x86_64.pkg.tar.xz && \
 	wget https://archive.org/download/archlinux_pkg_automake/automake-1.15-1-any.pkg.tar.xz && \
 	sudo pacman -U --noconfirm automake-1.15-1-any.pkg.tar.xz && \
 	rm -rf automake-1.15-1-any.pkg.tar.xz && \
 	wget https://hoanganhduc.github.io/archlinux/x86_64/libunicodenames-1.2.2-1-x86_64.pkg.tar.zst && \
 	sudo pacman -U --noconfirm libunicodenames-1.2.2-1-x86_64.pkg.tar.zst && \
-	rm -rf libunicodenames-1.2.2-1-x86_64.pkg.tar.zst
-
-## Poppler 0.59.0
-RUN wget https://poppler.freedesktop.org/poppler-0.59.0.tar.xz && \
-	tar -xvf poppler-0.59.0.tar.xz && \
-	cd poppler-0.59.0/ &&\
-	./configure --prefix=/usr/local --enable-xpdf-headers && \
-	make && \
-	sudo make install && \
-	sudo ln -sf /usr/local/lib/libpoppler.so.70 /usr/lib/libpoppler.so.70 && \
-	cd .. && rm -rf poppler-0.59.0*
+	rm -rf libunicodenames-1.2.2-1-x86_64.pkg.tar.zst && \
+	yay -S --needed --noconfirm poppler-qt5 libxi pango giflib libtool desktop-file-utils gtk-update-icon-cache gc python shared-mime-info openjpeg2 qt5-base
 
 ## Fontforge
-RUN curl -O https://download.libsodium.org/libsodium/releases/old/unsupported/libsodium-0.7.1.tar.gz && \
-	tar xvf libsodium-0.7.1.tar.gz && \
-	cd libsodium-0.7.1/ && \
-	./configure --prefix=/usr/local && \
-	make && \
-	sudo make install && \
-	sudo ln -sf /usr/local/lib/libsodium.so.13 /usr/lib/libsodium.so.13 && \
-	cd .. && rm -rf libsodium-0.7.1* && \
-	yay -S --noconfirm --needed readline6 && \
+
+RUN yay -S --noconfirm --needed readline6 && \
+	wget https://archive.org/download/archlinux_pkg_libsodium/libsodium-0.7.1-1-x86_64.pkg.tar.xz && sudo pacman -U --noconfirm libsodium-0.7.1-1-x86_64.pkg.tar.xz && \
 	wget https://hoanganhduc.github.io/archlinux/x86_64/zeromq-4.0.6-1-x86_64.pkg.tar.xz && sudo pacman -U --noconfirm zeromq-4.0.6-1-x86_64.pkg.tar.xz && \
 	wget https://hoanganhduc.github.io/archlinux/x86_64/libxkbui-1.0.2-6-x86_64.pkg.tar.xz && sudo pacman -U --noconfirm libxkbui-1.0.2-6-x86_64.pkg.tar.xz && \
 	wget https://hoanganhduc.github.io/archlinux/x86_64/libspiro-1%3A0.5.20150702-2-x86_64.pkg.tar.xz && sudo pacman -U --noconfirm libspiro-1:0.5.20150702-2-x86_64.pkg.tar.xz && \
@@ -79,6 +70,28 @@ RUN curl -O https://download.libsodium.org/libsodium/releases/old/unsupported/li
 ## pdf2htmlEX
 #RUN git clone --depth 1 https://github.com/coolwanglu/pdf2htmlEX.git && cd pdf2htmlEX/ && cmake . && make && sudo make install && cd .. && rm -rf pdf2htmlEX
 RUN yay -S --needed --noconfirm pdf2htmlex-git
+
+## Upgrading poppler, libsodium; install old packages to /usr/local; and link the libraries
+
+RUN sudo pacman -S --needed --noconfirm poppler poppler-glib poppler-qt5
+
+RUN wget https://poppler.freedesktop.org/poppler-0.59.0.tar.xz && \
+	tar -xvf poppler-0.59.0.tar.xz && \
+	cd poppler-0.59.0/ &&\
+	./configure --prefix=/usr/local --enable-xpdf-headers && \
+	make && \
+	sudo make install && \
+	sudo ln -sf /usr/local/lib/libpoppler.so.70 /usr/lib/libpoppler.so.70 && \
+	cd .. && rm -rf poppler-0.59.0*
+
+RUN curl -O https://download.libsodium.org/libsodium/releases/old/unsupported/libsodium-0.7.1.tar.gz && \
+	tar xvf libsodium-0.7.1.tar.gz && \
+	cd libsodium-0.7.1/ && \
+	./configure --prefix=/usr/local && \
+	make && \
+	sudo make install && \
+	sudo ln -sf /usr/local/lib/libsodium.so.13 /usr/lib/libsodium.so.13 && \
+	cd .. && rm -rf libsodium-0.7.1*
 
 # TeXLive 2020
 
