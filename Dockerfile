@@ -54,8 +54,8 @@ RUN wget https://poppler.freedesktop.org/poppler-0.59.0.tar.xz && \
 	cd poppler-0.59.0/ &&\
 	./configure --prefix=/usr/local --enable-xpdf-headers && \
 	make && \
-	make install && \
-	ln -sf /usr/local/lib/libpoppler.so.70 /usr/lib/libpoppler.so.70 && \
+	sudo make install && \
+	sudo ln -sf /usr/local/lib/libpoppler.so.70 /usr/lib/libpoppler.so.70 && \
 	cd .. && rm -rf poppler-0.59.0*
 
 ## Fontforge
@@ -64,8 +64,8 @@ RUN curl -O https://download.libsodium.org/libsodium/releases/old/unsupported/li
 	cd libsodium-0.7.1/ && \
 	./configure --prefix=/usr/local && \
 	make && \
-	make install && \
-	ln -sf /usr/local/lib/libsodium.so.13 /usr/lib/libsodium.so.13 && \
+	sudo make install && \
+	sudo ln -sf /usr/local/lib/libsodium.so.13 /usr/lib/libsodium.so.13 && \
 	cd .. && rm -rf libsodium-0.7.1* && \
 	yay -S --noconfirm --needed readline6 && \
 	wget https://hoanganhduc.github.io/archlinux/x86_64/zeromq-4.0.6-1-x86_64.pkg.tar.xz && sudo pacman -U --noconfirm zeromq-4.0.6-1-x86_64.pkg.tar.xz && \
@@ -75,7 +75,7 @@ RUN curl -O https://download.libsodium.org/libsodium/releases/old/unsupported/li
 	rm -rf *.pkg.tar.*
 
 ## pdf2htmlEX
-#RUN git clone --depth 1 https://github.com/coolwanglu/pdf2htmlEX.git && cd pdf2htmlEX/ && cmake . && make && make install && cd .. && rm -rf pdf2htmlEX
+#RUN git clone --depth 1 https://github.com/coolwanglu/pdf2htmlEX.git && cd pdf2htmlEX/ && cmake . && make && sudo make install && cd .. && rm -rf pdf2htmlEX
 RUN yay -S --needed --noconfirm pdf2htmlex-git
 
 # TeXLive 2020
