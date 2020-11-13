@@ -26,10 +26,12 @@ ENV LC_ALL en_US.UTF-8
 # Some necessary tools
 
 RUN pacman -Syy && \
-	pacman -S --needed --noconfirm base base-devel cmake wget curl git sudo openssh tree rsync
+	pacman -S --needed --noconfirm base base-devel cmake wget curl git sudo openssh tree rsync gnupg
 	
 USER $USERNAME
 WORKDIR $USERHOME
+
+RUN mkdir -p .gnupg && echo "keyserver hkp://pool.sks-keyservers.net" >> .gnupg/gpg.conf
 
 # yay
 
