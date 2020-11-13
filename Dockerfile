@@ -53,7 +53,7 @@ RUN yay -S --needed --noconfirm poppler-data && \
 	wget https://hoanganhduc.github.io/archlinux/x86_64/libunicodenames-1.2.2-1-x86_64.pkg.tar.zst && \
 	sudo pacman -U --noconfirm libunicodenames-1.2.2-1-x86_64.pkg.tar.zst && \
 	rm -rf libunicodenames-1.2.2-1-x86_64.pkg.tar.zst && \
-	yay -S --needed --noconfirm poppler-qt5 libxi pango giflib libtool desktop-file-utils gtk-update-icon-cache gc python shared-mime-info openjpeg2 qt5-base
+	yay -S --needed --noconfirm libxi pango giflib libtool desktop-file-utils gtk-update-icon-cache gc python shared-mime-info openjpeg2 qt5-base
 
 ## Fontforge
 
