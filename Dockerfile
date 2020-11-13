@@ -39,6 +39,11 @@ RUN git clone https://aur.archlinux.org/yay && \
 	cd yay && \
 	makepkg -si --noconfirm --needed && \
 	cd .. && rm -rf yay
+	
+# Java
+
+RUN yay -S --needed --noconfirm jdk-openjdk jre-openjdk # latest java
+RUN yay -S --needed --noconfirm jdk11-openjdk jre11-openjdk jdk8-openjdk jre8-openjdk # version 8 and 11
 
 # Build pdf2htmlEX
 
@@ -94,11 +99,6 @@ RUN curl -O https://download.libsodium.org/libsodium/releases/old/unsupported/li
 # TeXLive 2020
 
 RUN yay -S --needed --noconfirm texlive-most texlive-lang biber
-
-# Java
-
-RUN yay -S --needed --noconfirm jdk-openjdk jre-openjdk # latest java
-RUN yay -S --needed --noconfirm jdk11-openjdk jre11-openjdk jdk8-openjdk jre8-openjdk # version 8 and 11
 
 # IPE
 
