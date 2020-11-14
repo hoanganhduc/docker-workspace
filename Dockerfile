@@ -1,4 +1,4 @@
-FROM archlinux:20191006
+FROM archlinux:latest
 LABEL author="Duc A. Hoang"
 
 ARG USERNAME=hoanganhduc
@@ -52,13 +52,13 @@ RUN yay -S --needed --noconfirm jdk11-openjdk jre11-openjdk jdk8-openjdk jre8-op
 # Build pdf2htmlEX
 
 RUN yay -S --needed --noconfirm poppler-data && \
-	wget https://archive.org/download/archlinux_pkg_cmake/cmake-2.8.12.2-2-x86_64.pkg.tar.xz && \
-	sudo pacman -U --noconfirm --needed cmake-2.8.12.2-2-x86_64.pkg.tar.xz && \
-	rm -rf cmake-2.8.12.2-2-x86_64.pkg.tar.xz && \
-	wget https://archive.org/download/archlinux_pkg_poppler/poppler-0.59.0-1-x86_64.pkg.tar.xz && \
-	wget https://archive.org/download/archlinux_pkg_poppler-glib/poppler-glib-0.59.0-1-x86_64.pkg.tar.xz && \
-	sudo pacman -U --noconfirm poppler-0.59.0-1-x86_64.pkg.tar.xz poppler-glib-0.59.0-1-x86_64.pkg.tar.xz && \
-	rm -rf poppler-0.59.0-1-x86_64.pkg.tar.xz poppler-glib-0.59.0-1-x86_64.pkg.tar.xz && \
+#	wget https://archive.org/download/archlinux_pkg_cmake/cmake-2.8.12.2-2-x86_64.pkg.tar.xz && \
+#	sudo pacman -U --noconfirm --needed cmake-2.8.12.2-2-x86_64.pkg.tar.xz && \
+#	rm -rf cmake-2.8.12.2-2-x86_64.pkg.tar.xz && \
+	wget https://archive.org/download/archlinux_pkg_poppler/poppler-0.46.0-1-x86_64.pkg.tar.xz && \
+	wget https://archive.org/download/archlinux_pkg_poppler-glib/poppler-glib-0.46.0-1-x86_64.pkg.tar.xz && \
+	sudo pacman -U --noconfirm poppler-0.59.0-1-x86_64.pkg.tar.xz poppler-glib-0.46.0-1-x86_64.pkg.tar.xz && \
+	rm -rf poppler-0.46.0-1-x86_64.pkg.tar.xz poppler-glib-0.46.0-1-x86_64.pkg.tar.xz && \
 	wget https://archive.org/download/archlinux_pkg_automake/automake-1.15-1-any.pkg.tar.xz && \
 	sudo pacman -U --noconfirm automake-1.15-1-any.pkg.tar.xz && \
 	rm -rf automake-1.15-1-any.pkg.tar.xz && \
