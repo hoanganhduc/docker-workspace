@@ -52,9 +52,10 @@ RUN yay -S --needed --noconfirm jdk11-openjdk jre11-openjdk jdk8-openjdk jre8-op
 # Build pdf2htmlEX
 
 RUN yay -S --needed --noconfirm poppler-data && \
+	wget https://archive.org/download/archlinux_pkg_lzo2/lzo2-2.06-1-x86_64.pkg.tar.xz && \
 	wget https://archive.org/download/archlinux_pkg_cairo/cairo-1.12.16-1-x86_64.pkg.tar.xz && \
-	sudo pacman -U --noconfirm --needed cairo-1.12.16-1-x86_64.pkg.tar.xz && \
-	rm -rf cairo-1.12.16-1-x86_64.pkg.tar.xz && \
+	sudo pacman -U --noconfirm --needed lzo2-2.06-1-x86_64.pkg.tar.xz cairo-1.12.16-1-x86_64.pkg.tar.xz && \
+	rm -rf lzo2-2.06-1-x86_64.pkg.tar.xz cairo-1.12.16-1-x86_64.pkg.tar.xz && \
 	yay -S --needed --noconfirm libxi pango giflib libtool desktop-file-utils gtk-update-icon-cache gc python shared-mime-info openjpeg qt5-base && \
 	wget https://archive.org/download/archlinux_pkg_poppler/poppler-0.59.0-1-x86_64.pkg.tar.xz && \
 	wget https://archive.org/download/archlinux_pkg_poppler-glib/poppler-glib-0.59.0-1-x86_64.pkg.tar.xz && \
