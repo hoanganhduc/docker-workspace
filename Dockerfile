@@ -53,10 +53,6 @@ RUN yay -S --needed --noconfirm jdk11-openjdk jre11-openjdk jdk8-openjdk jre8-op
 
 RUN yay -S --needed --noconfirm poppler-data && \
 	yay -S --needed --noconfirm poppler poppler-glib poppler-qt5 libxi pango giflib libtool desktop-file-utils gtk-update-icon-cache gc python shared-mime-info openjpeg qt5-base && \
-	wget https://archive.org/download/archlinux_pkg_poppler/poppler-0.59.0-1-x86_64.pkg.tar.xz && \
-	wget https://archive.org/download/archlinux_pkg_poppler-glib/poppler-glib-0.59.0-1-x86_64.pkg.tar.xz && \
-	sudo pacman -U --noconfirm poppler-0.59.0-1-x86_64.pkg.tar.xz poppler-glib-0.59.0-1-x86_64.pkg.tar.xz && \
-	rm -rf poppler-0.59.0-1-x86_64.pkg.tar.xz poppler-glib-0.59.0-1-x86_64.pkg.tar.xz && \
 	wget https://archive.org/download/archlinux_pkg_automake/automake-1.15-1-any.pkg.tar.xz && \
 	sudo pacman -U --noconfirm automake-1.15-1-any.pkg.tar.xz && \
 	rm -rf automake-1.15-1-any.pkg.tar.xz && \
