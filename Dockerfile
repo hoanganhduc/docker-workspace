@@ -122,7 +122,7 @@ RUN yay -S --needed --noconfirm python2-virtualenv python2-pip && \
 
 # Jekyll
 
-RUN yay -S --needed --noconfirm ruby ruby-dev
+RUN yay -S --needed --noconfirm ruby rubygems
 RUN cd $HOME && \
 	gem install bundler && \
 	wget https://raw.githubusercontent.com/hoanganhduc/hoanganhduc.github.io/master/Gemfile && \
