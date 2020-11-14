@@ -125,6 +125,7 @@ RUN yay -S --needed --noconfirm python2-virtualenv python2-pip && \
 RUN yay -S --needed --noconfirm ruby rubygems
 RUN cd $HOME && \
 	gem install bundler && \
+	export PATH=/home/hoanganhduc/.gem/ruby/2.7.0/bin:$PATH && \
 	wget https://raw.githubusercontent.com/hoanganhduc/hoanganhduc.github.io/master/Gemfile && \
 	wget https://raw.githubusercontent.com/hoanganhduc/hoanganhduc.github.io/master/Gemfile.lock &&  \
 	bundle install && \
