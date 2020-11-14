@@ -57,10 +57,10 @@ RUN yay -S --needed --noconfirm poppler-data && \
 	sudo pacman -U --noconfirm --needed lzo2-2.06-1-x86_64.pkg.tar.xz cairo-1.12.16-1-x86_64.pkg.tar.xz && \
 	rm -rf lzo2-2.06-1-x86_64.pkg.tar.xz cairo-1.12.16-1-x86_64.pkg.tar.xz && \
 	yay -S --needed --noconfirm poppler poppler-glib poppler-qt5 libxi pango giflib libtool desktop-file-utils gtk-update-icon-cache gc python shared-mime-info openjpeg qt5-base && \
-	wget https://archive.org/download/archlinux_pkg_poppler/poppler-0.59.0-1-x86_64.pkg.tar.xz && \
-	wget https://archive.org/download/archlinux_pkg_poppler-glib/poppler-glib-0.59.0-1-x86_64.pkg.tar.xz && \
-	sudo pacman -U --noconfirm poppler-0.59.0-1-x86_64.pkg.tar.xz poppler-glib-0.59.0-1-x86_64.pkg.tar.xz && \
-	rm -rf poppler-0.59.0-1-x86_64.pkg.tar.xz poppler-glib-0.59.0-1-x86_64.pkg.tar.xz && \
+#	wget https://archive.org/download/archlinux_pkg_poppler/poppler-0.59.0-1-x86_64.pkg.tar.xz && \
+#	wget https://archive.org/download/archlinux_pkg_poppler-glib/poppler-glib-0.59.0-1-x86_64.pkg.tar.xz && \
+#	sudo pacman -U --noconfirm poppler-0.59.0-1-x86_64.pkg.tar.xz poppler-glib-0.59.0-1-x86_64.pkg.tar.xz && \
+#	rm -rf poppler-0.59.0-1-x86_64.pkg.tar.xz poppler-glib-0.59.0-1-x86_64.pkg.tar.xz && \
 	wget https://archive.org/download/archlinux_pkg_automake/automake-1.15-1-any.pkg.tar.xz && \
 	sudo pacman -U --noconfirm automake-1.15-1-any.pkg.tar.xz && \
 	rm -rf automake-1.15-1-any.pkg.tar.xz && \
