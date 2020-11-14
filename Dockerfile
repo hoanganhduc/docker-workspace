@@ -56,7 +56,7 @@ RUN yay -S --needed --noconfirm poppler-data && \
 	wget https://archive.org/download/archlinux_pkg_cairo/cairo-1.12.16-1-x86_64.pkg.tar.xz && \
 	sudo pacman -U --noconfirm --needed lzo2-2.06-1-x86_64.pkg.tar.xz cairo-1.12.16-1-x86_64.pkg.tar.xz && \
 	rm -rf lzo2-2.06-1-x86_64.pkg.tar.xz cairo-1.12.16-1-x86_64.pkg.tar.xz && \
-	yay -S --needed --noconfirm libxi pango giflib libtool desktop-file-utils gtk-update-icon-cache gc python shared-mime-info openjpeg qt5-base && \
+	yay -S --needed --noconfirm poppler poppler-glib poppler-qt5 libxi pango giflib libtool desktop-file-utils gtk-update-icon-cache gc python shared-mime-info openjpeg qt5-base && \
 	wget https://archive.org/download/archlinux_pkg_poppler/poppler-0.59.0-1-x86_64.pkg.tar.xz && \
 	wget https://archive.org/download/archlinux_pkg_poppler-glib/poppler-glib-0.59.0-1-x86_64.pkg.tar.xz && \
 	sudo pacman -U --noconfirm poppler-0.59.0-1-x86_64.pkg.tar.xz poppler-glib-0.59.0-1-x86_64.pkg.tar.xz && \
@@ -67,6 +67,15 @@ RUN yay -S --needed --noconfirm poppler-data && \
 	wget https://hoanganhduc.github.io/archlinux/x86_64/libunicodenames-1.2.2-1-x86_64.pkg.tar.zst && \
 	sudo pacman -U --noconfirm libunicodenames-1.2.2-1-x86_64.pkg.tar.zst && \
 	rm -rf libunicodenames-1.2.2-1-x86_64.pkg.tar.zst
+	
+RUN wget https://poppler.freedesktop.org/poppler-0.59.0.tar.xz && \
+	tar -xvf poppler-0.59.0.tar.xz && \
+	cd poppler-0.59.0/ &&\
+	./configure --prefix=/usr --enable-xpdf-headers && \
+	make && \
+	sudo make install && \
+#	sudo ln -sf /usr/local/lib/libpoppler.so.70 /usr/lib/libpoppler.so.70 && \
+	cd .. && rm -rf poppler-0.59.0*
 
 ## Fontforge
 
@@ -85,15 +94,6 @@ RUN yay -S --needed --noconfirm pdf2htmlex-git
 ## Upgrading poppler, libsodium; install old packages to /usr/local; and link the libraries
 
 RUN sudo pacman -S --needed --noconfirm poppler poppler-glib poppler-qt5
-
-RUN wget https://poppler.freedesktop.org/poppler-0.59.0.tar.xz && \
-	tar -xvf poppler-0.59.0.tar.xz && \
-	cd poppler-0.59.0/ &&\
-	./configure --prefix=/usr/local --enable-xpdf-headers && \
-	make && \
-	sudo make install && \
-	sudo ln -sf /usr/local/lib/libpoppler.so.70 /usr/lib/libpoppler.so.70 && \
-	cd .. && rm -rf poppler-0.59.0*
 
 RUN curl -O https://download.libsodium.org/libsodium/releases/old/unsupported/libsodium-0.7.1.tar.gz && \
 	tar xvf libsodium-0.7.1.tar.gz && \
