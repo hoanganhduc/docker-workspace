@@ -1,4 +1,4 @@
-FROM archlinux:latest
+FROM archlinux:20191006
 LABEL author="Duc A. Hoang"
 
 ARG USERNAME=hoanganhduc
@@ -35,10 +35,14 @@ RUN mkdir -p .gnupg && echo "keyserver hkp://pool.sks-keyservers.net" >> .gnupg/
 
 # yay
 
-RUN git clone https://aur.archlinux.org/yay && \
-	cd yay && \
-	makepkg -si --noconfirm --needed && \
-	cd .. && rm -rf yay
+#RUN git clone https://aur.archlinux.org/yay && \
+#	cd yay && \
+#	makepkg -si --noconfirm --needed && \
+#	cd .. && rm -rf yay
+
+RUN wget https://hoanganhduc.github.io/archlinux/x86_64/yay-10.0.4-1-x86_64.pkg.tar.zst && \
+	sudo pacman -U --noconfirm --needed yay-10.0.4-1-x86_64.pkg.tar.zst && \
+	rm -rf yay-10.0.4-1-x86_64.pkg.tar.zst
 	
 # Java
 
