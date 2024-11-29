@@ -14,6 +14,8 @@ ARG USERHOME=/home/hoanganhduc
 ARG USERID=1000
 ARG USERGECOS='Duc A. Hoang'
 
+RUN userdel -r vscode
+
 RUN useradd \
 	--create-home \
 	--home-dir "$USERHOME" \
