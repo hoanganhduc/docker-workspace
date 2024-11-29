@@ -47,14 +47,6 @@ RUN yay -S --noconfirm --needed latex2html
 
 RUN yay -S --noconfirm --needed perl-latexml
 
-# DocOnce
-
-RUN yay -S --needed --noconfirm python2-virtualenv python2-pip && \
-	sudo pip2 install setuptools ipython tornado pyzmq traitlets pickleshare jsonschema pdftools future mako python-Levenshtein lxml sphinx && \
-	git clone https://github.com/hoanganhduc/preprocess && cd preprocess && sudo python2 setup.py install && cd .. && sudo rm -rf preprocess && \
-	git clone https://github.com/hoanganhduc/logg-publish && cd logg-publish && sudo python2 setup.py install && cd .. && sudo rm -rf logg-publish && \
-	git clone https://github.com/hoanganhduc/doconce.git && cd doconce && sudo python2 setup.py install && cd .. && sudo rm -rf doconce
-
 # Jekyll
 
 RUN yay -S --needed --noconfirm ruby rubygems
