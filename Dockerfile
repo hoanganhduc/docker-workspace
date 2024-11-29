@@ -52,7 +52,7 @@ RUN yay -S --noconfirm --needed perl-latexml
 RUN yay -S --needed --noconfirm ruby rubygems
 RUN cd $HOME && \
 	gem install bundler && \
-	export PATH=/home/hoanganhduc/.gem/ruby/3.3.0/bin:$PATH && \
+	export PATH=/home/hoanganhduc/.local/share/gem/ruby/3.3.0/bin:$PATH && \
 	wget https://raw.githubusercontent.com/hoanganhduc/hoanganhduc.github.io/master/Gemfile && \
 	wget https://raw.githubusercontent.com/hoanganhduc/hoanganhduc.github.io/master/Gemfile.lock &&  \
 	bundle install && \
