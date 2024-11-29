@@ -54,7 +54,6 @@ RUN cd $HOME && \
 	gem install bundler && \
 	export PATH=/home/hoanganhduc/.local/share/gem/ruby/3.3.0/bin:$PATH && \
 	wget https://raw.githubusercontent.com/hoanganhduc/hoanganhduc.github.io/master/Gemfile && \
-	wget https://raw.githubusercontent.com/hoanganhduc/hoanganhduc.github.io/master/Gemfile.lock &&  \
 	bundle install && \
 	rm -rf Gemfile Gemfile.lock
 	
