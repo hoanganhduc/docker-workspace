@@ -7,6 +7,8 @@ LABEL org.opencontainers.image.description="A custom Arch Linux installation wit
 LABEL org.opencontainers.image.licenses="MIT"
 LABEL org.opencontainers.image.authors="Duc A. Hoang <anhduc.hoang1990@gmail.com>"
 
+USER root
+
 ARG USERNAME=hoanganhduc
 ARG USERHOME=/home/hoanganhduc
 ARG USERID=1000
@@ -65,3 +67,4 @@ RUN cd $HOME && \
 # Remove more unnecessary stuff
 RUN yes | yay -Scc
 
+CMD [ "/bin/zsh" ]
