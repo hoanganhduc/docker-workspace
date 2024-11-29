@@ -2,14 +2,13 @@
 
 Dockerfile with
 
-* LaTeX: TeXLive 2020.
+* LaTeX: TeXLive 2024.
 * LaTeXML: Latest version from Arch Linux.
-* IPE Extensible Drawing Editor: Version 7.2.21.
-* pdf2htmlEX: From [pdf2htmlex-git](https://aur.archlinux.org/packages/pdf2htmlex-git).
+* IPE Extensible Drawing Editor: Latest version from Arch Linux.
+* pdf2htmlEX: Latest version from Arch Linux.
 * LaTeX2HTML: Latest version from Arch Linux.
 * DocOnce: Latest version from https://github.com/hoanganhduc/doconce.
-* ~~git-latexdiff: Latest version from GitHub repository https://gitlab.com/git-latexdiff/git-latexdiff.~~
 * Jekyll: HTML static site generator https://jekyllrb.com/.
-* Java: `java-8-openjdk`, `java-11-openjdk`, and latest Java version from Arch Linux.
+* Java: `java-11-openjdk`.
 
-Automated build image: [hoanganhduc/workspace](https://hub.docker.com/r/hoanganhduc/workspace/).
+Automated build image: [hoanganhduc/workspace](https://ghcr.io/hoanganhduc/workspace/).
