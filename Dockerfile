@@ -46,16 +46,6 @@ RUN yay -S --noconfirm --needed latex2html
 # LaTeXML
 
 RUN yay -S --noconfirm --needed perl-latexml
-
-# Jekyll
-
-RUN yay -S --needed --noconfirm ruby rubygems
-RUN cd $HOME && \
-	gem install bundler && \
-	export PATH=/home/hoanganhduc/.local/share/gem/ruby/3.3.0/bin:$PATH && \
-	wget https://raw.githubusercontent.com/hoanganhduc/hoanganhduc.github.io/master/Gemfile && \
-	bundle install && \
-	rm -rf Gemfile Gemfile.lock
 	
 # Remove more unnecessary stuff
 RUN yes | yay -Scc

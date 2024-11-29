@@ -7,7 +7,6 @@ Dockerfile with
 * IPE Extensible Drawing Editor: Latest version from Arch Linux.
 * pdf2htmlEX: Latest version from Arch Linux.
 * LaTeX2HTML: Latest version from Arch Linux.
-* Jekyll: HTML static site generator https://jekyllrb.com/.
 * Java: `java-11-openjdk`.
 
 Automated build image: [hoanganhduc/workspace](https://ghcr.io/hoanganhduc/workspace/).
