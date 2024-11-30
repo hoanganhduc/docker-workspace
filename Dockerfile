@@ -38,7 +38,8 @@ RUN	wget https://raw.githubusercontent.com/hoanganhduc/docker-texlive/refs/heads
 
 RUN curl -L get.rvm.io > rvm-install && \
 	chmod a+x rvm-install && \
-	./rvm-install
+	./rvm-install && \
+	echo "source $USERHOME/.rvm/scripts/rvm" >> $USERHOME/.zshrc
 
 # pdf2htmlEX
 
