@@ -30,8 +30,7 @@ USER $USERNAME
 WORKDIR $USERHOME
 CMD [ "/bin/zsh" ]
 
-RUN mkdir -p .gnupg && echo "keyserver hkp://pool.sks-keyservers.net" >> .gnupg/gpg.conf && \
-	wget https://raw.githubusercontent.com/hoanganhduc/docker-texlive/refs/heads/master/.zshrc && \
+RUN	wget https://raw.githubusercontent.com/hoanganhduc/docker-texlive/refs/heads/master/.zshrc && \
 	chmod 644 .zshrc
 
 # pdf2htmlEX
