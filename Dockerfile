@@ -31,8 +31,15 @@ WORKDIR $USERHOME
 CMD [ "/bin/zsh" ]
 
 RUN wget https://raw.githubusercontent.com/hoanganhduc/docker-texlive/refs/heads/master/.zshrc && \
-	chmod 644 $USERHOME/.zshrc && \
-  	echo "alias pdf2htmlex=\"pdf2htmlEX --appimage-extract-and-run\"" >> $USERHOME/.zshrc
+	chmod 644 $USERHOME/.zshrc  	
+
+# Update
+
+RUN yay -Syy
+
+# TeXLive dummy
+
+RUN yay -S --noconfirm --needed texlive-dummy
 
 # RVM
 
@@ -43,7 +50,8 @@ RUN curl -L get.rvm.io > rvm-install && \
 
 # pdf2htmlEX
 
-RUN yay -S --needed --noconfirm pdf2htmlex-appimage
+RUN yay -S --needed --noconfirm pdf2htmlex-appimage && \
+	echo "alias pdf2htmlex=\"pdf2htmlEX --appimage-extract-and-run\"" >> $USERHOME/.zshrc	
 
 # IPE
 
