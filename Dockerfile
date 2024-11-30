@@ -32,14 +32,13 @@ CMD [ "/bin/zsh" ]
 
 RUN	wget https://raw.githubusercontent.com/hoanganhduc/docker-texlive/refs/heads/master/.zshrc && \
 	chmod 644 $USERHOME/.zshrc && \
-	echo "alias pdf2htmlex=\"pdf2htmlEX --appimage-extract-and-run\"" >> $USERHOME/.zshrc
+	echo "\n alias pdf2htmlex=\"pdf2htmlEX --appimage-extract-and-run\"" >> $USERHOME/.zshrc
 
 # RVM
 
 RUN curl -L get.rvm.io > rvm-install && \
 	chmod a+x rvm-install && \
-	./rvm-install && \
-	echo "source $USERHOME/.rvm/scripts/rvm" >> $USERHOME/.zshrc
+	./rvm-install
 
 # pdf2htmlEX
 
