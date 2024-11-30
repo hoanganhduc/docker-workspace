@@ -97,7 +97,9 @@
 				// Remove the line below if you do not want Grammarly
 				// "znck.grammarly",
 				// Remove the line below if you do not want Overleaf Workshop
-				"iamhyc.overleaf-workshop"
+				"iamhyc.overleaf-workshop",
+				// Remove the line below if you do not want HTML preview
+				"george-alisson.html-preview-vscode"
 			]
 		}
 	},
