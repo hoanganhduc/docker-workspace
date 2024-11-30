@@ -10,7 +10,7 @@ LABEL org.opencontainers.image.authors="Duc A. Hoang <anhduc.hoang1990@gmail.com
 USER root
 
 ARG USERNAME=hoanganhduc
-ARG USERHOME=/home/hoanganhduc
+ARG USERHOME=/home/$USERNAME
 ARG USERID=1000
 ARG USERGECOS='Duc A. Hoang'
 
