@@ -22,14 +22,17 @@ RUN useradd \
 	--password "" \
 	--uid "$USERID" \
 	--comment "$USERGECOS" \
-	--shell /bin/bash \
+	--shell /bin/zsh \
 	"$USERNAME" && \
 	echo "$USERNAME ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 	
 USER $USERNAME
 WORKDIR $USERHOME
+CMD [ "/bin/zsh" ]
 
-RUN mkdir -p .gnupg && echo "keyserver hkp://pool.sks-keyservers.net" >> .gnupg/gpg.conf
+RUN mkdir -p .gnupg && echo "keyserver hkp://pool.sks-keyservers.net" >> .gnupg/gpg.conf && \
+	wget https://raw.githubusercontent.com/hoanganhduc/docker-texlive/refs/heads/master/.zshrc && \
+	chmod 644 .zshrc
 
 # pdf2htmlEX
 
@@ -50,4 +53,4 @@ RUN yay -S --noconfirm --needed perl-latexml
 # Remove more unnecessary stuff
 RUN yes | yay -Scc
 
-CMD [ "/bin/zsh" ]
+
