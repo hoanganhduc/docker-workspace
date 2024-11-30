@@ -10,4 +10,4 @@ Dockerfile with
 * Java: `java-11-openjdk`.
 * Ruby Version Manager (`rvm`): Latest version from Arch Linux.
 
-Automated build image: [hoanganhduc/workspace](ghcr.io/hoanganhduc/workspace/).
+Automated build image: [hoanganhduc/workspace](http://ghcr.io/hoanganhduc/workspace/).
