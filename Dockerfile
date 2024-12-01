@@ -55,7 +55,8 @@ RUN yay -S --noconfirm --needed ipe
 
 # LaTeX2HTML
 
-RUN git clone https://github.com/latex2html/latex2html.git && \
+RUN yay -S --noconfirm --needed perl ghostscript libpng giflib netpbm && \
+	git clone https://github.com/latex2html/latex2html.git && \
 	cd latex2html && \
 	./configure && \
 	make && \
@@ -65,7 +66,10 @@ RUN git clone https://github.com/latex2html/latex2html.git && \
 
 # LaTeXML
 
-RUN git clone https://github.com/brucemiller/LaTeXML.git && \
+RUN yay -S --noconfirm --needed perl-pod-parser perl-parse-recdescent  perl-text-unidecode \
+	imagemagick perl-xml-libxml perl-json-xs perl-xml-libxslt db perl-image-size \
+	perl-file-which perl-libwww perl-io-string perl-archive-zip && \
+	git clone https://github.com/brucemiller/LaTeXML.git && \
 	cd LaTeXML && \
 	perl Makefile.PL && \
 	make && \
