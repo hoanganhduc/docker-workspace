@@ -55,7 +55,7 @@ RUN yay -S --noconfirm --needed ipe
 
 # LaTeX2HTML
 
-RUN git clone https://github.com:latex2html/latex2html.git && \
+RUN git clone https://github.com/latex2html/latex2html.git && \
 	cd latex2html && \
 	./configure && \
 	make && \
