@@ -37,10 +37,6 @@ RUN wget https://raw.githubusercontent.com/hoanganhduc/docker-texlive/refs/heads
 
 RUN yay -Syy
 
-# TeXLive dummy
-
-RUN yay -S --noconfirm --needed texlive-dummy
-
 # RVM
 
 RUN curl -L get.rvm.io > rvm-install && \
@@ -59,11 +55,23 @@ RUN yay -S --noconfirm --needed ipe
 
 # LaTeX2HTML
 
-RUN yay -S --noconfirm --needed latex2html
+RUN git clone git@github.com:latex2html/latex2html.git && \
+	cd latex2html && \
+	./configure && \
+	make && \
+	sudo make install && \
+	cd .. && \
+	rm -rf latex2html
 
 # LaTeXML
 
-RUN yay -S --noconfirm --needed perl-latexml
+RUN git clone https://github.com/brucemiller/LaTeXML.git && \
+	cd LaTeXML && \
+	perl Makefile.PL && \
+	make && \
+	sudo make install && \
+	cd .. && \
+	rm -rf LaTeXML
 	
 # Remove more unnecessary stuff
 RUN yes | yay -Scc
