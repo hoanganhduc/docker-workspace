@@ -11,12 +11,19 @@
 \usepackage{amsmath}
 \usepackage{amsthm}
 \usepackage{amssymb}
-
-% Unicode
+\usepackage{graphicx}
+\graphicspath{{figs/}}
+\usepackage{xcolor}
+\usepackage{mathrsfs} % for \mathscr command
 \usepackage[utf8]{inputenc}
+\usepackage{adjustbox}
+\usepackage{enumerate}
+
+% Hyperref
 \usepackage{hyperref}
 \hypersetup{
 	unicode,
+%   hidelinks,
 %	colorlinks,
 %	breaklinks,
 %	urlcolor=cyan, 
@@ -29,12 +36,29 @@
 	pdfcreator={pdflatex}
 }
 
-% Vietnamese
-%\usepackage{vntex}
+% Cleveref
+\usepackage[capitalise,noabbrev]{cleveref} % must be loaded after hyperref
+\crefname{cond}{Condition}{Conditions}
+\creflabelformat{cond}{(#2C#1#3)}
+\crefname{eitem}{}{}
+\creflabelformat{eitem}{(#2#1#3)}
+\crefname{step}{\textbf{Step}}{\textbf{Steps}}
+\creflabelformat{step}{{\bf #2#1#3}}
 
-% Natbib
-\usepackage[sort&compress,numbers,square]{natbib}
-\bibliographystyle{mplainnat}
+% Biblatex
+\usepackage[%
+		backend=biber, 
+		bibstyle=numeric, 
+		citestyle=numeric-comp,
+		maxcitenames=3,
+		maxbibnames=20,
+		sorting=ydnt
+		]{biblatex}
+\addbibresource{refs.bib}
+
+% % Natbib
+% \usepackage[sort&compress,numbers,square]{natbib}
+% \bibliographystyle{mplainnat}
 
 % Theorem, Lemma, etc
 \theoremstyle{plain}
@@ -56,12 +80,12 @@
 \newtheorem{problem}[theorem]{Problem}
 \newtheorem{principle}[theorem]{Principle}
 
-\usepackage{graphicx, color}
-\graphicspath{{fig/}}
-
 %\usepackage[linesnumbered,ruled,vlined,commentsnumbered]{algorithm2e} % use algorithm2e for typesetting algorithms
 \usepackage{algorithm, algpseudocode} % use algorithm and algorithmicx for typesetting algorithms
 \usepackage{mathrsfs} % for \mathscr command
+
+%% Line numbering
+\usepackage[pagewise]{lineno}
 
 \usepackage{lipsum}
 
@@ -76,97 +100,102 @@
 }
 
 \begin{document}
-	\maketitle
-	
-	\begin{abstract}
-		\lipsum[1]
-		
-		\noindent\textbf{Keywords:} article, template, simple
-	\end{abstract}
+\linenumbers
+\maketitle
 
-	\tableofcontents
-	
-	\section{Introduction}
-	\label{sec:intro}
-	
-	\lipsum[2]
-	
-	\subsection{Preliminaries}
-	\label{sec:pre}
-	
-	\lipsum[3]
-	
-	\subsection{Previous Results}
-	\label{sec:prev-results}
-	
-	Null graphs are discussed in \cite{HararyR74}
-	The concept of ``internally stable set'' was used in \cite{Berge57, Berge58}.
-	
-	\begin{theorem}
-		\label{thrm:1}
-		\lipsum[4]
-	\end{theorem}
-	\begin{proof}
-		content...
-	\end{proof}
+\begin{abstract}
+	\lipsum[1]
 
-	\begin{corollary}
+	\noindent\textbf{Keywords:} article, template, simple
+\end{abstract}
+
+\tableofcontents
+
+\section{Introduction}
+\label{sec:intro}
+
+\lipsum[2]
+
+\subsection{Preliminaries}
+\label{sec:pre}
+
+\lipsum[3]
+
+\subsection{Previous Results}
+\label{sec:prev-results}
+
+Null graphs are discussed in \cite{HararyR74}
+The concept of ``internally stable set'' was used in \cite{Berge57, Berge58}.
+
+\begin{theorem}
+	\label{thrm:1}
+	\lipsum[4]
+\end{theorem}
+\begin{proof}
+	content...
+\end{proof}
+
+\begin{corollary}
 	\label{cor:1}
-	
+
 	\lipsum[5]
-	\end{corollary}
+\end{corollary}
 
-	Unordered List (taken from Overleaf)
-	\begin{itemize}
-		\item The individual entries are indicated with a black dot, a so-called bullet.
-		\item The text in the entries may be of any length.
-	\end{itemize}
+Unordered List (taken from Overleaf)
+\begin{itemize}
+	\item The individual entries are indicated with a black dot, a so-called bullet.
+	\item The text in the entries may be of any length.
+\end{itemize}
 
-	Ordered List (taken from Overleaf)
-	\begin{enumerate}
-		\item The labels consists of sequential numbers.
-		\item The numbers starts at 1 with every call to the enumerate environment.
-	\end{enumerate}
+Ordered List (taken from Overleaf)
+\begin{enumerate}
+	\item The labels consists of sequential numbers.
+	\item The numbers starts at 1 with every call to the enumerate environment.
+\end{enumerate}
 
-	\begin{table}[ht]
-		\centering
-		\begin{tabular}{|c|c|}
-			\hline
-			\textbf{Odd} & \textbf{Even} \\
-			\hline\hline
-			One & Two \\
-			\hline
-			Three & Four \\
-			\hline
-		\end{tabular}
-		\caption{This is a table}
-		\label{tbl:1}
-	\end{table}
+\begin{table}[ht]
+	\centering
+	\begin{tabular}{|c|c|}
+		\hline
+		\textbf{Odd} & \textbf{Even} \\
+		\hline\hline
+		One          & Two           \\
+		\hline
+		Three        & Four          \\
+		\hline
+	\end{tabular}
+	\caption{This is a table}
+	\label{tbl:1}
+\end{table}
 
-	Table~\ref*{tbl:1} is an example of a table.
-	
-	\section{More Examples}
-	\label{sec:examples}
-	
-	Now we include a figure.
-	(See Figure~\ref{fig:example}.)
-	\begin{figure}[ht]
-		\centering
-		\includegraphics[width=0.3\textwidth]{example}
-		\caption{An example of a figure}
-		\label{fig:example}
-	\end{figure}
-	
-	\paragraph{Acknowledgements} \lipsum[6]
-	
+Table~\ref*{tbl:1} is an example of a table.
+
+\section{More Examples}
+\label{sec:examples}
+
+Now we include a figure.
+(See Figure~\ref{fig:example}.)
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=0.3\textwidth]{example}
+	\caption{An example of a figure}
+	\label{fig:example}
+\end{figure}
+
+\paragraph{Acknowledgements} \lipsum[6]
+
 %	\newpage
-	\bibliography{refs}
-	
-	\appendix
-	
-	\section{Omitted Proof in Section~\ref{sec:examples}}
-	\label{app:1}
-	
-	\lipsum[7]
-	
+
+% Uncomment this if using natbib
+% \bibliography{refs}
+
+\printbibliography
+
+\appendix
+
+\section{Omitted Proof in Section~\ref{sec:examples}}
+\label{app:1}
+
+\lipsum[7]
+
 \end{document}

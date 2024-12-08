@@ -5,20 +5,16 @@
 	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
 	//"image": "mcr.microsoft.com/devcontainers/base:ubuntu",
 	"image": "ghcr.io/hoanganhduc/workspace:latest",
-    // "build": {
-    //     // Path is relative to the devcontainer.json file.
-    //     "dockerfile": "Dockerfile"
-    // },
-
+	// "build": {
+	//     // Path is relative to the devcontainer.json file.
+	//     "dockerfile": "Dockerfile"
+	// },
 	// Features to add to the dev container. More info: https://containers.dev/features.
 	// "features": {},
-
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [],
-
 	// Use 'updateContentCommand' to run commands when creating the container.
 	"updateContentCommand": "",
-
 	// Configure tool-specific properties.
 	"customizations": {
 		"vscode": {
@@ -31,6 +27,7 @@
 				"files.eol": "\n",
 				"git.autofetch": true,
 				"git.enableSmartCommit": true,
+				"git.enableCommitSigning": true,
 				"terminal.integrated.cwd": "${fileDirname}",
 				// latex-workshop settings taken from https://github.com/sanjib-sen/WebLaTex/
 				"latex-workshop.latex.clean.fileTypes": [
@@ -82,7 +79,7 @@
 				// See here: https://tex.stackexchange.com/a/726922
 				"latex-workshop.formatting.latex": "latexindent",
 				"latex-workshop.latex.pdfWatch.delay": 500,
- 				//"latex-workshop.latex.watch.delay": 500, // Deprecated. See here: https://github.com/sanjib-sen/WebLaTex/issues/8
+				//"latex-workshop.latex.watch.delay": 500, // Deprecated. See here: https://github.com/sanjib-sen/WebLaTex/issues/8
 				"latex-workshop.codespaces.portforwarding.openDelay": 20000
 			},
 			// Add the IDs of extensions you want installed when the container is created.
