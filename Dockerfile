@@ -25,7 +25,11 @@ RUN useradd \
 	--shell /bin/zsh \
 	"$USERNAME" && \
 	echo "$USERNAME ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
-	
+
+# LaTeX pax
+COPY pax /usr/bin/pax 
+RUN chmod +x /usr/bin/pax	
+
 USER $USERNAME
 WORKDIR $USERHOME
 CMD [ "/bin/zsh" ]
@@ -35,7 +39,7 @@ RUN wget https://raw.githubusercontent.com/hoanganhduc/docker-texlive/refs/heads
 
 # Update
 
-RUN yay -Syy
+RUN yay -Syy && yay -S --noconfirm --needed archlinux-keyring
 
 # RVM
 
@@ -79,11 +83,7 @@ RUN yay -S --noconfirm --needed perl-pod-parser perl-parse-recdescent perl-text-
 
 # PDFBox
 RUN yay -S --noconfirm --needed jre11-openjdk pdfbox
-RUN wget https://cyfuture.dl.sourceforge.net/project/pdfbox/PDFBox/PDFBox-0.7.3/PDFBox-0.7.3.zip && unzip PDFBox-0.7.3.zip -d /usr/share/java && rm -rf PDFBox-0.7.3.zip
-
-# LaTeX pax
-COPY pax /usr/bin/pax 
-RUN chmod +x /usr/bin/pax
+RUN wget https://cyfuture.dl.sourceforge.net/project/pdfbox/PDFBox/PDFBox-0.7.3/PDFBox-0.7.3.zip && sudo unzip PDFBox-0.7.3.zip -d /usr/share/java && rm -rf PDFBox-0.7.3.zip
 
 # Remove more unnecessary stuff
 RUN yes | yay -Scc
