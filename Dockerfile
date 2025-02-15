@@ -66,7 +66,7 @@ RUN yay -S --noconfirm --needed perl ghostscript libpng giflib netpbm && \
 
 # LaTeXML
 
-RUN yay -S --noconfirm --needed perl-pod-parser perl-parse-recdescent  perl-text-unidecode \
+RUN yay -S --noconfirm --needed perl-pod-parser perl-parse-recdescent perl-text-unidecode \
 	imagemagick perl-xml-libxml perl-json-xs perl-xml-libxslt db perl-image-size \
 	perl-file-which perl-libwww perl-io-string perl-archive-zip && \
 	git clone https://github.com/brucemiller/LaTeXML.git && \
@@ -76,7 +76,15 @@ RUN yay -S --noconfirm --needed perl-pod-parser perl-parse-recdescent  perl-text
 	sudo make install && \
 	cd .. && \
 	rm -rf LaTeXML
-	
+
+# PDFBox
+RUN yay -S --noconfirm --needed jre11-openjdk pdfbox
+RUN wget https://cyfuture.dl.sourceforge.net/project/pdfbox/PDFBox/PDFBox-0.7.3/PDFBox-0.7.3.zip && unzip PDFBox-0.7.3.zip -d /usr/share/java && rm -rf PDFBox-0.7.3.zip
+
+# LaTeX pax
+COPY pax /usr/bin/pax 
+RUN chmod +x /usr/bin/pax
+
 # Remove more unnecessary stuff
 RUN yes | yay -Scc
 
