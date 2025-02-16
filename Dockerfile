@@ -26,10 +26,6 @@ RUN useradd \
 	"$USERNAME" && \
 	echo "$USERNAME ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
-# LaTeX pax
-COPY pax /usr/bin/pax 
-RUN chmod +x /usr/bin/pax	
-
 USER $USERNAME
 WORKDIR $USERHOME
 CMD [ "/bin/zsh" ]
@@ -80,10 +76,6 @@ RUN yay -S --noconfirm --needed perl-pod-parser perl-parse-recdescent perl-text-
 	sudo make install && \
 	cd .. && \
 	rm -rf LaTeXML
-
-# PDFBox
-RUN yay -S --noconfirm --needed jre11-openjdk pdfbox
-RUN sudo wget https://cyfuture.dl.sourceforge.net/project/pdfbox/PDFBox/PDFBox-0.7.3/PDFBox-0.7.3.zip && sudo unzip -o PDFBox-0.7.3.zip -d /usr/share/java && sudo rm -rf PDFBox-0.7.3.zip
 
 # Remove more unnecessary stuff
 RUN yes | yay -Scc
