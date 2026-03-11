@@ -18,7 +18,7 @@ jobs:
       packages: write
 
     steps:
-      - name: Checkout GitHub Action
+      - name: Checkout
         uses: actions/checkout@v4
 
       - name: Set up QEMU
@@ -34,15 +34,21 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build and push OpenClaw sandbox image
+      - name: Build and push multi-arch sandbox image
         uses: docker/build-push-action@v6
         with:
           context: .
           file: ./Dockerfile
+          pull: true
+          no-cache: true
           push: true
           platforms: linux/amd64,linux/arm64
+          provenance: false
+          sbom: false
           tags: |
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
-          labels: |
-            org.opencontainers.image.source=https://github.com/${{ github.repository }}
+
+      - name: Verify pushed manifest
+        run: |
+          docker buildx imagetools inspect ghcr.io/hoanganhduc/openclaw-sandbox:latest
