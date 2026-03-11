@@ -16,11 +16,11 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
  && rm -rf /var/lib/apt/lists/*
 
-RUN useradd -m -u 1000 -s /bin/bash ubuntu \
+RUN useradd -m -u 1001 -s /bin/bash ubuntu \
  && mkdir -p /workspace \
- && chown -R 1000:1000 /workspace /home/ubuntu
+ && chown -R 1001:1001 /workspace /home/ubuntu
 
-USER 1000:1000
+USER 1001:1001
 WORKDIR /workspace
 
 CMD ["sleep", "infinity"]
