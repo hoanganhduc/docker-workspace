@@ -1,29 +1,33 @@
-# Dockerfile.sandbox.custom
-FROM openclaw-sandbox-common:bookworm-slim
+# syntax=docker/dockerfile:1.7
+FROM debian:bookworm-slim@sha256:98f4b71de414932439ac6ac690d7060df1f27161073c5036a7553723881bffbe
 
-USER root
+ENV DEBIAN_FRONTEND=noninteractive
+ENV LANG=C.UTF-8
+ENV LC_ALL=C.UTF-8
+ENV PYTHONUNBUFFERED=1
+ENV PIP_NO_CACHE_DIR=1
 
-RUN apt-get update && apt-get install -y --no-install-recommends \
-	python3 \
-	python3-venv \
-	python3-pip \
-	python3-dev \
-	build-essential \
-	git \
-	curl \
-	jq \
-	sudo \
- && rm -rf /var/lib/apt/lists/*
+RUN --mount=type=cache,id=openclaw-sandbox-bookworm-apt-cache,target=/var/cache/apt,sharing=locked \
+    --mount=type=cache,id=openclaw-sandbox-bookworm-apt-lists,target=/var/lib/apt,sharing=locked \
+    apt-get update \
+    && apt-get install -y --no-install-recommends \
+      bash \
+      ca-certificates \
+      curl \
+      git \
+      jq \
+      ripgrep \
+      python3 \
+      python3-pip \
+      python3-venv \
+      python3-dev \
+      python3-virtualenv \
+      build-essential \
+    && rm -rf /var/lib/apt/lists/*
 
-RUN apt-get update && apt-get install -y --no-install-recommends \
-	texlive-full \
- && rm -rf /var/lib/apt/lists/*
-
-# Create user 'ubuntu' with no password and add to sudoers
-RUN useradd -m -s /bin/bash ubuntu && \
-	usermod -aG sudo ubuntu && \
-	echo "ubuntu ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+RUN useradd --create-home --shell /bin/bash ubuntu
 
 USER ubuntu
-WORKDIR /workspace
+WORKDIR /home/ubuntu
 
+CMD ["sleep", "infinity"]
