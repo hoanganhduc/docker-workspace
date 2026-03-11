@@ -25,8 +25,6 @@ RUN --mount=type=cache,id=openclaw-sandbox-bookworm-apt-cache,target=/var/cache/
       build-essential \
     && rm -rf /var/lib/apt/lists/*
 
-RUN useradd --create-home --shell /bin/bash ubuntu
-
 RUN useradd -m -u 1000 -s /bin/bash ubuntu \
  && mkdir -p /workspace \
  && chown -R 1000:1000 /workspace /home/ubuntu
