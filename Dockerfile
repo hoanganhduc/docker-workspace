@@ -27,7 +27,11 @@ RUN --mount=type=cache,id=openclaw-sandbox-bookworm-apt-cache,target=/var/cache/
 
 RUN useradd --create-home --shell /bin/bash ubuntu
 
-USER ubuntu
-WORKDIR /home/ubuntu
+RUN useradd -m -u 1000 -s /bin/bash ubuntu \
+ && mkdir -p /workspace \
+ && chown -R 1000:1000 /workspace /home/ubuntu
+
+USER 1000:1000
+WORKDIR /workspace
 
 CMD ["sleep", "infinity"]
