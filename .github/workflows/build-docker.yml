@@ -1,4 +1,4 @@
-name: Build and Push OpenClaw Docker Images
+name: Build and Push OpenClaw Sandbox Image
 
 on:
   push:
@@ -8,10 +8,10 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  SANDBOX_IMAGE: ghcr.io/hoanganhduc/openclaw-sandbox:latest
+  IMAGE_NAME: hoanganhduc/openclaw-sandbox
 
 jobs:
-  push-images:
+  push-sandbox-image:
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -20,6 +20,9 @@ jobs:
     steps:
       - name: Checkout GitHub Action
         uses: actions/checkout@v4
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
@@ -35,6 +38,11 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           context: .
-          file: Dockerfile
+          file: ./Dockerfile.openclaw-sandbox
           push: true
-          tags: ${{ env.SANDBOX_IMAGE }}
+          platforms: linux/amd64,linux/arm64
+          tags: |
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
+          labels: |
+            org.opencontainers.image.source=https://github.com/${{ github.repository }}
