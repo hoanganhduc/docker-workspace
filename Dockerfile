@@ -30,6 +30,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     texlive-xetex \
     texlive-luatex \
     ghostscript \
+    unzip \
+    wget \
  && rm -rf /var/lib/apt/lists/*
 
 RUN curl -O https://downloads.rclone.org/rclone-current-linux-arm64.zip && \
