@@ -22,9 +22,17 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     chromium \
     chromium-driver \
     pdftk \
+    texlive-full \
+    fonts-lmodern \
+    texlive-latex-extra \
+    texlive-lang-all \
+    latexmk \
+    texlive-xetex \
+    texlive-luatex \
+    ghostscript \
  && rm -rf /var/lib/apt/lists/*
 
-RUN curl https://rclone.org/install.sh | sudo bash
+RUN curl https://rclone.org/install.sh | bash
 
 RUN useradd -m -u 1001 -s /bin/bash ubuntu \
  && mkdir -p /workspace \
