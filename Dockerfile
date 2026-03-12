@@ -4,7 +4,9 @@ ENV DEBIAN_FRONTEND=noninteractive \
     LANG=C.UTF-8 \
     LC_ALL=C.UTF-8 \
     PYTHONUNBUFFERED=1 \
-    PIP_NO_CACHE_DIR=1
+    PIP_NO_CACHE_DIR=1 \
+    CHROME_BIN=/usr/bin/chromium \
+    CHROMEDRIVER_PATH=/usr/bin/chromedriver
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     bash \
@@ -17,9 +19,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libqpdf-dev \
     libjpeg-dev \
     zlib1g-dev \
- && rm -rf /var/lib/apt/lists/*
-
-RUN apt-get install -y --no-install-recommends \
     chromium \
     chromium-driver \
  && rm -rf /var/lib/apt/lists/*
