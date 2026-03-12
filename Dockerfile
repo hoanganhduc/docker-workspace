@@ -32,7 +32,12 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     ghostscript \
  && rm -rf /var/lib/apt/lists/*
 
-RUN curl https://rclone.org/install.sh | bash
+RUN curl -O https://downloads.rclone.org/rclone-current-linux-arm64.zip && \
+    unzip rclone-current-linux-arm64.zip && \
+    cp rclone-*-linux-arm64/rclone /usr/local/bin/ && \
+    chmod +x /usr/local/bin/rclone && \
+    rm -rf rclone-*-linux-arm64* && \
+    rclone version
 
 RUN useradd -m -u 1001 -s /bin/bash ubuntu \
  && mkdir -p /workspace \
