@@ -21,7 +21,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     zlib1g-dev \
     chromium \
     chromium-driver \
+    pdftk \
  && rm -rf /var/lib/apt/lists/*
+
+RUN curl https://rclone.org/install.sh | sudo bash
 
 RUN useradd -m -u 1001 -s /bin/bash ubuntu \
  && mkdir -p /workspace \
