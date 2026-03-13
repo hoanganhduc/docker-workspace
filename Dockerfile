@@ -34,6 +34,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     wget \
     rsync \
     zip \
+    openssh-client \
+    openssh-server \
  && rm -rf /var/lib/apt/lists/*
 
 RUN curl -O https://downloads.rclone.org/rclone-current-linux-arm64.zip && \
